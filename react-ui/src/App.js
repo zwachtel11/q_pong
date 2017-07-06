@@ -35,6 +35,8 @@ class App extends Component {
     fetch('api/currentWeekDataPoints')
       .then(response => {
         if (!response.ok) {
+          console.log('response')
+          console.log(response.status)
           throw new Error(`status ${response.status}`);
         }
         return response.json();
