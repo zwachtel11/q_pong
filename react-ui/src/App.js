@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+// import { DataPointService } from './Services/Services.js'
 
 class App extends Component {
   constructor(props) {
@@ -12,24 +13,74 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch('/api')
+    // fetch('/api')
+    //   .then(response => {
+    //     if (!response.ok) {
+    //       throw new Error(`status ${response.status}`);
+    //     }
+    //     return response.json();
+    //   })
+    //   .then(json => {
+    //     this.setState({
+    //       message: json.message,
+    //       fetching: false
+    //     });
+    //   }).catch(e => {
+    //     this.setState({
+    //       message: `API call failed: ${e}`,
+    //       fetching: false
+    //     });
+    //   })
+
+    fetch('api/currentWeekDataPoints')
       .then(response => {
         if (!response.ok) {
           throw new Error(`status ${response.status}`);
         }
         return response.json();
-      })
-      .then(json => {
-        this.setState({
-          message: json.message,
-          fetching: false
-        });
+      }).then(json => {
+        console.log(json);
       }).catch(e => {
-        this.setState({
-          message: `API call failed: ${e}`,
-          fetching: false
-        });
+        throw e;
       })
+
+
+    // fetch('/api/users')
+    //   .then(response => {
+    //     if (!response.ok) {
+    //       throw new Error(`status ${response.status}`);
+    //     }
+    //     return response.json();
+    //   })
+    //   .then(json => {
+    //     console.log(json);
+    //   })
+    //   .catch(e => {
+    //     console.log(e);
+    //   })
+  }
+
+  createDataPoint = () => {
+    console.log("boom");
+
+    const dp = {
+      value: Math.random() * 10
+    };
+
+    console.log(dp);
+
+    fetch('/api/dataPoints', {
+      method: 'post',
+      body: JSON.stringify(dp),
+      headers: {
+                "Content-Type": "application/json"
+            }
+    }).then(res => {
+      return res.json();
+    }).then(json => {
+      console.log(json);
+    })
+
   }
 
   render() {
@@ -50,6 +101,9 @@ class App extends Component {
             ? 'Fetching message from API'
             : this.state.message}
         </p>
+        <div>
+          <input type="submit" className="btn" onClick={this.createDataPoint} value="Create Data Point" />
+        </div>
       </div>
     );
   }
