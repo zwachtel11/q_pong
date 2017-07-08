@@ -109,19 +109,19 @@ class WeeklyChart extends Component {
 
 		const formattedData = this.state.data.map((dp, index) => {
 			return {
-				hour: index,
+				hour: index+1,
 				value: dp
 			}
 		});
 
 		// console.log(formattedData);
 
-		const ticks = [...Array(7).keys()].map(dp => dp+1);
+		const ticks = [...Array(7).keys()].map(dp => dp);
 
 		return (
 			<div>
 			    <VictoryChart
-			        domainPadding={40} >
+			        domainPadding={20} >
 			        <VictoryAxis
 			          tickValues={ticks}
 			          label="Days"
