@@ -52,9 +52,9 @@ class RoomList extends Component {
   render() {
     const mappedRooms = this.state.rooms
       ? this.state.rooms.map(room => {
-        return <ListGroupItem><Link to={`rooms/${room.roomName}`}>{room.roomName + " - " + room.status}</Link></ListGroupItem>
+        return <ListGroupItem bsStyle={room.occupied ? "danger" : "success"}><Link to={`rooms/${room.roomName}`}>{room.roomName + " - " + room.status}</Link></ListGroupItem>
       })
-      : <ListGroupItem><Link to="asdf">asdf</Link></ListGroupItem>
+      : <ListGroupItem><Link to="asdf"></Link></ListGroupItem>
 
     return (
       <div className="container">
