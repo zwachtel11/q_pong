@@ -128,7 +128,8 @@ class Appppp extends Component {
 
 class Home extends Component {
   constructor() {
-    super() {
+    super() 
+    this.state = {
       rooms: null
     }
   }
@@ -161,8 +162,6 @@ class Home extends Component {
       <Chart />
     </div>
   }
-
-
 
 }
 
