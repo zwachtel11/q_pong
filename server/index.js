@@ -178,7 +178,7 @@ app.get('/api/rooms', (req, res) => {
     const roomData = rooms.map(room => {
       return {
         roomName: room.room_name,
-        status: Math.random() > .5 ? 1 : 0
+        occupied: room.occupied
       }
     });
     console.log(roomData)
