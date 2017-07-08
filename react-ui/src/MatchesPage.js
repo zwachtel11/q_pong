@@ -31,9 +31,9 @@ class MatchesList extends Component {
   componentDidMount() {
   	const roomName = this.props.roomName;
 
-  	const query = '/api/rooms/' + roomName;
+  	const query = '/api/matches/' + roomName;
   	console.log(query);
-    fetch('/api/rooms/')
+    fetch(query)
       .then(response => {
         if (!response.ok) {
           console.log('response');
