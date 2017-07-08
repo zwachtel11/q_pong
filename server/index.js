@@ -66,8 +66,8 @@ app.post('/api/roomdata', (req, res) => {
       res.send({message:"error"});
     }
     Room.findOne({'room_name':roomName}, (err, room) => {
-      // console.log(room.daily_graph.data.length);
-      if(room.daily_graph.data === []){
+      console.log(room.daily_graph.data.length);
+      if(room.daily_graph.data.length == 0){
         const graph = [0.0, 0.2, 0.5, 0.5, 0.6, 0.75, 0.4, 0.2, 0.0, 0.2, 0.5, 0.5, 0.6, 0.75, 0.4, 0.2, 0.0, 0.2, 0.5, 0.5, 0.6, 0.75, 0.4, 0.2];
         room.daily_graph.data = graph;
         room.daily_graph.last_update = new Date();
