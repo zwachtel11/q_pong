@@ -8,12 +8,15 @@ import {
   Link
 } from 'react-router-dom';
 
+import logo2 from './logo2.png';
+
 export default class Home extends Component {
   render() {
     return (
       <div>
-        <Jumbotron>
-          <h1 style={{textAlign: "center"}}>Welcome to Q Ping Pong</h1>
+        <Jumbotron style={{background:"#005cb3"}}>
+          <div style={{textAlign:"center"}}><img src={logo2} width={200} height={200} style={{textAlign:"center"}} /></div>
+          <h1 style={{textAlign: "center", color:"white"}}>Welcome to Q Ping Pong</h1>
         </Jumbotron>
         <RoomList />
       </div>
