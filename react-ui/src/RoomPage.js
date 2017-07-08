@@ -37,7 +37,7 @@ class DailyChart extends Component {
 	}
 
 	componentDidMount() {
-	    fetch('/api/ccc/currentDayDataPoints')
+	    fetch('/api/rooms/ccc/currentDayDataPoints')
 	      .then(response => {
 	        if (!response.ok) {
 	          console.log('response')
@@ -56,7 +56,9 @@ class DailyChart extends Component {
 	  }
 
 	render() {
-		return <div></div>
+		if (!this.state.data) {
+			return <div></div>
+		}
 		return (
 			<div>
 			    <VictoryChart
