@@ -76,7 +76,7 @@ class DailyChart extends Component {
 
 		const formattedData = this.state.data.map((dp, index) => {
 			return {
-				quarter: index,
+				hour: index,
 				value: dp
 			}
 		});
@@ -85,12 +85,12 @@ class DailyChart extends Component {
 
 		const tick = [...Array(24).keys()].map(dp => dp+1);
 
-		// const data = [
-		// 	{ hour: 1, val: 5 },
-		// 	{ hour: 2, val: 5 },
-		// 	{ hour: 3, val: 5 },
-		// 	{ hour: 4, val: 5 }
-		// ];
+		const data = [
+			{ hour: 1, val: 5 },
+			{ hour: 2, val: 5 },
+			{ hour: 3, val: 5 },
+			{ hour: 4, val: 5 }
+		];
 
 		// const data = [
 		//   {quarter: 1, earnings: 13},
@@ -118,8 +118,8 @@ class DailyChart extends Component {
 			        />
 			        <VictoryBar
 			          data={formattedData}
-			          x="quarter"
-			          y="earnings"
+			          x="hour"
+			          y="value"
 			        />
 			      </VictoryChart>
 			</div>
