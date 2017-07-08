@@ -77,7 +77,7 @@ class DailyChart extends Component {
 
 		const formattedData = this.state.data.map((dp, index) => {
 			return {
-				hour: index
+				hour: index,
 				value: dp
 			}
 		});
