@@ -38,7 +38,8 @@ class DailyChart extends Component {
 	}
 
 	componentDidMount() {
-	    fetch('/api/rooms/ccc/currentDayDataPoints')
+		const query = '/api/rooms/' + this.props.roomName + '/currentDayDataPoints'
+	    fetch(query)
 	      .then(response => {
 	        if (!response.ok) {
 	          console.log('response')
@@ -79,22 +80,16 @@ class DailyChart extends Component {
 
 		const ticks = [...Array(24).keys()].map(dp => dp+1);
 
-		console.log(tick);
 		return (
 			<div>
 			    <VictoryChart
-			        // domainPadding will add space to each side of VictoryBar to
-			        // prevent it from overlapping the axis
 			        domainPadding={20} >
 			        <VictoryAxis
-			          // tickValues specifies both the number of ticks and where
-			          // they are placed on the axis
 			          tickValues={ticks}
 			          // tickFormat={["Quarter 1", "Quarter 2", "Quarter 3", "Quarter 4"]}
 			        />
 			        <VictoryAxis
 			          dependentAxis
-			          // tickFormat specifies how ticks should be displayed
 			        />
 			        <VictoryBar
 			          data={formattedData}
