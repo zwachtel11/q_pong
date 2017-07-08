@@ -55,7 +55,7 @@ app.post('/api/roomdata', (req, res) => {
     created_at: new Date()
   };
 
-  Room.findAndUpdate({room_name: roomName}, {$push:{data_points: dp}}, {safe: true, upsert: true}, (err, model) => {
+  Room.findOneAndUpdate({room_name: roomName}, {$push:{data_points: dp}}, {safe: true, upsert: true}, (err, model) => {
     if (err) {
       console.log("err");
       res.send({message:"error"});
