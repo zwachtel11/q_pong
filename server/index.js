@@ -159,7 +159,7 @@ app.get('/api/:room/currentWeekDataPoints', (req, res) => {
   res.set('Content-Type', 'application/json');
   //User.find({ admin: true }).where('updated_at').gt(monthAgo).exec(function(err, users) {
   Room.findOne({"room_name":req.params.room}, (err, doc) =>{
-    res.send(doc);
+    res.send(doc.daily_graph);
   })
 });
 
