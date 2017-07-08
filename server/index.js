@@ -27,23 +27,33 @@ const dataPointSchema = new Schema({
   created_at: Date,
 });
 
+const DataPoint = mongoose.model('DataPoint', dataPointSchema);
+
+
 const roomSchema = new Schema({
-  data_points: [DataPoint],
+  data_points: [{
+    value: Number,
+    created_at: Date
+  }],
   room_name: String
 });
 
 const Room = mongoose.model('Room', roomSchema);
-const DataPoint = mongoose.model('DataPoint', dataPointSchema);
 
 app.post('/api/roomdata', (req, res) => {
   res.set('Content-Type', 'application/json');
 
   const roomName = req.body.room_name;
 
-  const dp = DataPoint({
+  // const dp = DataPoint({
+  //   value: req.body.value,
+  //   created_at: new Date()
+  // });
+
+  const dp = {
     value: req.body.value,
     created_at: new Date()
-  });
+  };
 
   Room.findAndUpdate({room_name: roomName}, {$push:{data_points: dp}}, {safe: true, upsert: true}, (err, model) => {
     if (err) {
@@ -59,32 +69,32 @@ app.post('/api/roomdata', (req, res) => {
 
 
 
-app.post('/api/roomdata', (req, res) => {
-  res.set('Content-Type', 'application/json');
-  console.log('got da dp');
-  console.log(req.body);
-  const dp = DataPoint({
-    value: req.body.value,
-    created_at: new Date()
-  });
+// app.post('/api/roomdata', (req, res) => {
+//   res.set('Content-Type', 'application/json');
+//   console.log('got da dp');
+//   console.log(req.body);
+//   const dp = DataPoint({
+//     value: req.body.value,
+//     created_at: new Date()
+//   });
 
-  dp.save(err => {
-    if (err) {
-      throw err;
-      res.send({message: "Error"});
-    }
-    console.log("saved dat bitch");
-    res.send({message: "Success"});
-  });
-});
+//   dp.save(err => {
+//     if (err) {
+//       throw err;
+//       res.send({message: "Error"});
+//     }
+//     console.log("saved dat bitch");
+//     res.send({message: "Success"});
+//   });
+// });
 
-app.get('/api/roomdata', (req, res) => {
-  res.set('Content-Type', 'application/json');
-  DataPoint.find({}, (err, dataPoints) => {
-    if (err) throw err;
-    res.send(dataPoints);
-  })
-});
+// app.get('/api/roomdata', (req, res) => {
+//   res.set('Content-Type', 'application/json');
+//   DataPoint.find({}, (err, dataPoints) => {
+//     if (err) throw err;
+//     res.send(dataPoints);
+//   })
+// });
 
 app.get('/api/roomdata/:room_name', (req, res) => {
   res.set('Content-Type', 'application/json');
@@ -96,7 +106,7 @@ app.get('/api/roomdata/:room_name', (req, res) => {
 
 app.get('/api/rooms', (req, res) => {
   res.set('Content-Type', 'application/json');
-  DataPoint.aggregate({})
+  // DataPoint.aggregate({})
 });
 
 
