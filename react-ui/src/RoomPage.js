@@ -68,9 +68,9 @@ class DailyChart extends Component {
 		//   {quarter: 3, earnings: 14250},
 		//   {quarter: 4, earnings: 19000}
 		// ];
-		console.log(updatedAt);
+		console.log(this.state.updatedAt);
 		updatedAt.setDay(updatedAt.getDay() - 1);
-		console.log(updatedAt);
+		console.log(this.state.updatedAt);
 
 
 		// const formattedData = this.state.data.map((dp, index) => {
