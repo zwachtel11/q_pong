@@ -155,47 +155,13 @@ app.get('/api/rooms', (req, res) => {
 });
 
 
-// app.get('/api/currentWeekDataPoints', (req, res) => {
-//   res.set('Content-Type', 'application/json');
-//   //User.find({ admin: true }).where('updated_at').gt(monthAgo).exec(function(err, users) {
-//   DataPoint.find({}).where('value').gt(5).exec((err, dataPoints) => {
-//     if (err) throw err;
-//     res.send(dataPoints);
-//   })
-// })
-
-// app.get('api/:room_name/dailygraph', (req, res)=>{
-//   res.set('Content-Type', 'application/json');
-//   const roomName = req.params.room_name;
-//   const query = {
-//     'room_name':roomName,
-//   }
-//   Room.findOne({'room_name':roomName}, (err, room) =>{
-//     if(!room.daily_graph){
-//       const graph = [0.0, 0.2, 0.5, 0.5, 0.6, 0.75, 0.4, 0.2];
-//       room.daily_graph.data = graph;
-//       room.daily_graph.last_update = new Date();
-//       room.save((err) =>{
-//         if(err){
-//           console.log("Error updating new data");
-//         }
-//       })
-//     }
-//     else{
-//       current_date = new Date()
-//       if(((current_date.getTime() - last_update.getTime())/1000.0)>3600){
-//         genNewDailyGraph()
-//       }
-//     }
-//     const last_update = room.daily_graph.last_update;
-//     const current_date = new Date()
-//     if(!last_update){
-
-//     } else if (((current_date.getTime() - last_update.getTime())/1000.0)>3600){ //3600 seconds in a hour
-
-//     }
-//   })
-// });
+app.get('/api/:room/currentWeekDataPoints', (req, res) => {
+  res.set('Content-Type', 'application/json');
+  //User.find({ admin: true }).where('updated_at').gt(monthAgo).exec(function(err, users) {
+  Room.findOne({"room_name":req.params.room}, (err, doc) =>{
+    res.send(doc);
+  })
+});
 
 
 
