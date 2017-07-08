@@ -7,7 +7,11 @@
   },
   "dependencies": {
     "react": "^15.4.2",
-    "react-dom": "^15.4.2"
+    "react-dom": "^15.4.2",
+    "react-router": "^4.1.1",
+    "react-router-dom": "^4.1.1",
+    "react-vis": "^1.6.6",
+    "victory": "^0.21.1"
   },
   "scripts": {
     "start": "react-scripts start",
