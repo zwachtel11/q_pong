@@ -12,7 +12,6 @@ export default class ReportMatchPage extends Component {
 			p2Name: null,
 			p2Email: null,
 			p2Score: null,
-			rooms: null,
 			roomName: null
 		}
 	}
@@ -40,9 +39,28 @@ export default class ReportMatchPage extends Component {
 		event.preventDefault();
 		console.log("asdf");
 
-		//post match
+		const match = {
+			p1_name: this.state.p1Name,
+			p1_email: this.state.p1Email,
+			p1_score: this.state.p1Score,
+			p2_name: this.state.p2Name,
+			p2_email: this.state.p2Email,
+			p2_score: this.state.p2Score,
+			room_name: this.state.roomName
+		}
 
-	}
+		fetch('/api/matches', {
+	      method: 'post',
+	      body: JSON.stringify(match),
+	      headers: {
+	                "Content-Type": "application/json"
+	            }
+	    }).then(res => {
+	      return res.json();
+	    }).then(json => {
+	      console.log(json);
+	    })
+		}
 
 	onValueChanged = (event) => {
 		console.log(event.target.name)
@@ -59,22 +77,14 @@ export default class ReportMatchPage extends Component {
 	}
 
 	render() {
-
-		const mappedRoomOptions = this.state.rooms ? this.state.rooms.map(room => {
-			return <option value={this.state.room.roomName}></option>
-		}) : null;
-
-
 		return (
 			<div className="container" style={{paddingTop: "20px"}}>
 				<h1 style={{textAlign:"center"}}>Report Match</h1>
 				<Row>
 					<Col md={2}></Col>
 					<Col md={8}>
-						<FormGroup controlId="formControlsSelect">
-							<FormControl componentClass="select" value={this.state.roomName} placeholder="Select Room" onChange={this.onRoomChanged}>
-								{mappedRoomOptions}
-							</FormControl>
+						<FormGroup>
+							<FormControl type="text" placeholder="Name" name="roomName" value={this.state.roomName} onChange={this.onValueChanged} />
 						</FormGroup>
 					</Col>
 					<Col md={2}></Col>
