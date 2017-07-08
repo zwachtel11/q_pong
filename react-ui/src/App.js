@@ -8,7 +8,9 @@ import {
 } from 'react-router-dom';
 
 import ReactDOM from 'react-dom';
-import {VictoryBar, VictoryChart, VictoryAxis} from 'victory';
+import { VictoryBar, VictoryChart, VictoryAxis } from 'victory';
+
+import Home from './Home.js';
 
 const data = [
   {quarter: 1, earnings: 13000},
@@ -125,53 +127,6 @@ class Appppp extends Component {
   }
 }
 
-
-class Home extends Component {
-  constructor() {
-    super() 
-    this.state = {
-      rooms: null
-    }
-  }
-
-  componentDidMount() {
-    fetch('/api/rooms')
-      .then(response => {
-        if (!response.ok) {
-          console.log('response')
-          console.log(response.status)
-          throw new Error(`status ${response.status}`);
-        }
-        return response.json();
-      }).then(json => {
-        console.log(json);
-        this.setState({
-          rooms: json
-        })
-      }).catch(e => {
-        throw e;
-      });
-  }
-
-  render() {
-    const mappedRooms = this.state.rooms
-      ? this.state.rooms.map(room => {
-        return <li>{room.roomName + " - " + room.status}</li>
-      })
-      : <li>asdf</li>
-
-    return (
-      <div>
-        <ul>
-          {mappedRooms}
-        </ul>
-        <Chart />
-        }
-      </div>
-    )
-  }
-
-}
 
 const About = () => (
   <div>
