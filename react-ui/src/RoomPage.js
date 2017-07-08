@@ -58,9 +58,9 @@ class DailyChart extends Component {
 	  }
 
 	render() {
-		if (!this.state.data) {
-			return <div></div>
-		}
+		// if (!this.state.data) {
+		// 	return <div></div>
+		// }
 
 		// const data = [
 		//   {quarter: 1, earnings: 13000},
@@ -76,14 +76,28 @@ class DailyChart extends Component {
 
 		const formattedData = this.state.data.map((dp, index) => {
 			return {
-				hour: index,
+				quarter: index,
 				value: dp
 			}
 		});
 
-		console.log(formattedData);
+		// console.log(formattedData);
 
 		const tick = [...Array(24).keys()].map(dp => dp+1);
+
+		// const data = [
+		// 	{ hour: 1, val: 5 },
+		// 	{ hour: 2, val: 5 },
+		// 	{ hour: 3, val: 5 },
+		// 	{ hour: 4, val: 5 }
+		// ];
+
+		// const data = [
+		//   {quarter: 1, earnings: 13},
+		//   {quarter: 2, earnings: 16},
+		//   {quarter: 3, earnings: 14},
+		//   {quarter: 4, earnings: 1}
+		// ];
 
 		console.log(tick);
 		return (
@@ -91,11 +105,11 @@ class DailyChart extends Component {
 			    <VictoryChart
 			        // domainPadding will add space to each side of VictoryBar to
 			        // prevent it from overlapping the axis
-			        domainPadding={20}>
+			        domainPadding={20} >
 			        <VictoryAxis
 			          // tickValues specifies both the number of ticks and where
 			          // they are placed on the axis
-			          tickValues={tick}
+			          tickValues={[1, 2, 3, 4]}
 			          // tickFormat={["Quarter 1", "Quarter 2", "Quarter 3", "Quarter 4"]}
 			        />
 			        <VictoryAxis
@@ -104,10 +118,10 @@ class DailyChart extends Component {
 			        />
 			        <VictoryBar
 			          data={formattedData}
-			          x="Hour"
-			          y="Value"
+			          x="quarter"
+			          y="earnings"
 			        />
-			    </VictoryChart>
+			      </VictoryChart>
 			</div>
 		)
 	}
