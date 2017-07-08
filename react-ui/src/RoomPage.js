@@ -8,6 +8,8 @@ import {
   Link
 } from 'react-router-dom';
 
+const moment = require('moment');
+
 export default class RoomPage extends Component {
 	constructor(props) {
 		super(props)
@@ -114,7 +116,7 @@ class WeeklyChart extends Component {
 
 		// console.log(formattedData);
 
-		const ticks = [...Array(4).keys()].map(dp => (dp+1) * 6);
+		const ticks = [...Array(7).keys()].map(dp => dp+1);
 
 		return (
 			<div>
@@ -122,11 +124,12 @@ class WeeklyChart extends Component {
 			        domainPadding={20} >
 			        <VictoryAxis
 			          tickValues={ticks}
+			          label="Days"
 			          // tickFormat={["Quarter 1", "Quarter 2", "Quarter 3", "Quarter 4"]}
 			        />
 			        <VictoryAxis
 			          dependentAxis
-
+			          label="% Utilization"
 			        />
 			        <VictoryBar
 			          data={formattedData}
@@ -210,7 +213,7 @@ class DailyChart extends Component {
 
 		// console.log(formattedData);
 
-		const ticks = [...Array(4).keys()].map(dp => (dp+1) * 6);
+		const ticks = [...Array(4).keys()].map(dp => (dp) * 6);
 
 		return (
 			<div>
@@ -218,10 +221,12 @@ class DailyChart extends Component {
 			        domainPadding={20} >
 			        <VictoryAxis
 			          tickValues={ticks}
+			          label="Hours"
 			          // tickFormat={["Quarter 1", "Quarter 2", "Quarter 3", "Quarter 4"]}
 			        />
 			        <VictoryAxis
 			          dependentAxis
+			          label="% Utilization"
 
 			        />
 			        <VictoryBar
@@ -289,12 +294,12 @@ class StatusPanel extends Component {
 						{this.state.occupied ? 
 						<div>
 							<h1>OCCUPIED</h1>
-							<p>Last Open: {this.state.lastOpen}</p>
+							<p>Last Open: {moment(this.state.lastOpen).calendar()}</p>
 							<p>Average Use: {this.state.averageUseTime}</p>
 						</div> : 
 						<div>
 							<h1>OPEN</h1>
-							<p>Last Open: {this.state.lastOpen}</p>
+							<p>Last Open: {moment(this.state.lastOpen).calendar()}</p>
 							<p>Average Use: {this.state.averageUseTime}</p>
 						</div>
 					}
