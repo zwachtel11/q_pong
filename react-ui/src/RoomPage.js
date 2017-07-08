@@ -288,9 +288,11 @@ class StatusPanel extends Component {
 			<Col md={8}>
 				<Panel header={<h1>{roomName}</h1>} style={{textAlign:"center"}}>
 					<Col md={4}>
+						<div style={{textAlign: "center"}}>
 						<svg>
 							<circle cx={75} cy={75} r={75} fill={this.state.occupied ? "red" : "green"} />
 						</svg>
+						</div>
 					</Col>
 					<Col md={8}>
 						{this.state.occupied ? 
