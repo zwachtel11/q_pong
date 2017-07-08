@@ -39,7 +39,8 @@ app.use(bodyParser.urlencoded({extended: true}));
     daily_graph: {
       data:[Number],
       updated_at: Date
-    }
+    },
+    occupied:Number
   });
 
   const Room = mongoose.model('Room', roomSchema);
@@ -60,7 +61,7 @@ app.post('/api/roomdata', (req, res) => {
   };
 
 
-  Room.findOneAndUpdate({room_name: roomName}, {$push:{data_points: dp}}, {safe: true, upsert: true}, (err, model) => {
+  Room.findOneAndUpdate({room_name: roomName}, {$push:{data_points: dp}, $set:{occupied:req.body.value}}, {safe: true, upsert: true}, (err, model) => {
     if (err) {
       console.log("err");
       res.send({message:"error"});
