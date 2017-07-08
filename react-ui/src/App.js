@@ -12,6 +12,7 @@ import ReactDOM from 'react-dom';
 import Home from './Home.js';
 import RoomPage from './RoomPage.js';
 import ReportMatchPage from './ReportMatchPage';
+import MatchesPage from './MatchesPage';
 
 
 
@@ -42,6 +43,7 @@ export default class App extends Component {
         <div>
           <Route exact path="/" component={Home} />
           <Route path='/reportMatch' component={ReportMatchPage} />
+          <Route path='/rooms/:roomName/matches' component={MatchesPage} />
           <Route path="/rooms/:roomName" component={RoomPage} />
           <Route path="/about" component={About} />
         </div>

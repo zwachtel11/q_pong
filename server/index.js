@@ -148,63 +148,6 @@ app.post('/api/roomdata', (req, res) => {
 
 
 
-  // const dp = DataPoint({
-  //   value: req.body.value,
-  //   created_at: new Date()
-  // });
-
-  const dp = {
-    value: req.body.value,
-    created_at: new Date()
-  };
-
-
-  Room.findOneAndUpdate({room_name: roomName}, {$push:{data_points: dp}, $set:{occupied:req.body.value}}, {safe: true, upsert: true}, (err, model) => {
-    if (err) {
-      console.log("err");
-      res.send({message:"error"});
-    }
-    Room.findOne({'room_name':roomName}, (err, room) => {
-      console.log(room.daily_graph.data.length);
-      if(room.daily_graph.data.length == 0){
-        const graph = [0.0, 0.2, 0.5, 0.5, 0.6, 0.75, 0.4, 0.2, 0.0, 0.2, 0.5, 0.5, 0.6, 0.75, 0.4, 0.2, 0.0, 0.2, 0.5, 0.5, 0.6, 0.75, 0.4, 0.2];
-        room.daily_graph.data = graph;
-        room.daily_graph.updated_at = new Date();
-        room.save((err) =>{
-          if(err){
-            console.log("Error updating new data");
-          }
-        })
-      }
-      else{
-        const current_date = new Date()
-        if(((current_date.getTime() - room.daily_graph.updated_at.getTime())/1000.0)>3600){
-
-          const datapoints = room.datapoints;
-          const count = 0;
-          const total = 0;
-          for (var i =0; i < datapoints.length; i++){
-            if(datapoints[i].created_at > room.daily_graph.updated_at){
-              total+= datapoints[i].value;
-              count++;
-            }
-          }
-          const average = count / float(total);
-          var new_data = room.daily_graph.slice(1);
-          new_data.add(average);
-          room.daily_graph.data = new_data;
-          room.daily_graph.updated_at = current_date;
-          room.save((err)=>{
-            console.log("Error updating new data");
-          });
-        }
-      } 
-      console.log("Success");
-      res.send({message: "Success"});
-    });
-  });
-});
-
 
 app.post('/api/matches', (req, res) => {
   var match = new Match({
@@ -224,26 +167,6 @@ app.post('/api/matches', (req, res) => {
   })
 })
 
-
-
-// app.post('/api/roomdata', (req, res) => {
-//   res.set('Content-Type', 'application/json');
-//   console.log('got da dp');
-//   console.log(req.body);
-//   const dp = DataPoint({
-//     value: req.body.value,
-//     created_at: new Date()
-//   });
-
-//   dp.save(err => {
-//     if (err) {
-//       throw err;
-//       res.send({message: "Error"});
-//     }
-//     console.log("saved dat bitch");
-//     res.send({message: "Success"});
-//   });
-// });
 
 app.get('/api/roomdata/:room_name', (req, res) => {
   res.set('Content-Type', 'application/json');
