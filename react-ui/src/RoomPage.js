@@ -57,7 +57,7 @@ class WeeklyPanel extends Component {
 		return (
 			<Col md={6}>
 				<Panel header={<h1>Daily Use</h1>} style={{textAlign:"center"}}>
-					<DailyChart roomName={roomName} />
+					<WeeklyChart roomName={roomName} />
 				</Panel>
 			</Col>
 		)
@@ -241,24 +241,65 @@ class StatusPanel extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
+			occupied: null,
+			lastOpen: null,
+			averageUseTime:null
 
 		}
 	}
 
+	componentDidMount() {
+		const query = '/api/rooms/' + this.props.roomName;
+	    console.log(query);
+	    fetch(query)
+	      .then(response => {
+	        if (!response.ok) {
+	          console.log('response')
+	          console.log(response.status)
+	          throw new Error(`status ${response.status}`);
+	        }
+	        return response.json();
+	      }).then(json => {
+	        console.log(json);
+	        this.setState({
+	        	occupied: json.occupied,
+	        	lastOpen: json.lastOpen,
+	        	averageUseTime: json.averageUseTime
+	        });
+	      }).catch(e => {
+	        throw e;
+	      });
+	}
+
 	render() {
 		const roomName = this.props.roomName;
+
+		if (!this.state.occupied) {
+			return null;
+		}
+
 		return (
 			<Col md={8}>
 				<Panel header={<h1>{roomName}</h1>} style={{textAlign:"center"}}>
 					<Col md={4}>
 						<svg>
-							<circle cx={75} cy={75} r={75} fill="green" />
+							<circle cx={75} cy={75} r={75} fill={this.state.occupied ? "red" : "green"} />
 						</svg>
 					</Col>
 					<Col md={8}>
-						<h1>OPEN</h1>
-						<p>Last Used: 10 min ago</p>
-						<p>Average Use: 25 min</p>
+						{this.state.occupied ? 
+						<div>
+							<h1>OCCUPIED</h1>
+							<p>Last Open: {this.state.lastOpen}</p>
+							<p>Average Use: {this.state.averageUseTime}</p>
+						</div> : 
+						<div>
+							<h1>OPEN</h1>
+							<p>Last Open: {this.state.lastOpen}</p>
+							<p>Average Use: {this.state.averageUseTime}</p>
+						</div>
+
+					}
 					</Col>
 				</Panel>
 			</Col>

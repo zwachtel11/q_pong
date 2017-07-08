@@ -185,11 +185,26 @@ app.get('/api/rooms', (req, res) => {
     const roomData = rooms.map(room => {
       return {
         roomName: room.room_name,
-        occupied: room.occupied
+        occupied: room.occupied,
+        averageUseTime: room.average_use_time,
+        lastOpen: room.lastOpen
       }
     });
     console.log(roomData)
     res.send(roomData);
+  })
+});
+
+app.get('/api/rooms/:roomname', (req, res) => {
+  res.set('Content-Type', 'application/json');
+  Room.findOne({room_name: req.params.roomname}, (err, room) => {
+    if (err) throw err;
+    res.send({
+        roomName: room.room_name,
+        occupied: room.occupied,
+        averageUseTime: room.average_use_time,
+        lastOpen: room.lastOpen
+    });
   })
 });
 
