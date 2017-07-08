@@ -8,6 +8,9 @@ import {
   Link
 } from 'react-router-dom';
 
+const moment = require('moment');
+
+
 export default class MatchesPage extends Component {
   render() {
     return (

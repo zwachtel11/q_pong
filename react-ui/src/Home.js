@@ -13,13 +13,15 @@ export default class Home extends Component {
     return (
       <div>
         <Jumbotron>
-          <h1>Welcome to Q Ping Pong</h1>
+          <h1 style={{textAlign: "center"}}>Welcome to Q Ping Pong</h1>
         </Jumbotron>
         <RoomList />
       </div>
     )
   }
 }
+          // <img src="./logo.png"></img>
+
 
 
 class RoomList extends Component {
