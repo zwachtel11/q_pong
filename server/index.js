@@ -70,7 +70,7 @@ app.post('/api/roomdata', (req, res) => {
       if(room.daily_graph.data.length == 0){
         const graph = [0.0, 0.2, 0.5, 0.5, 0.6, 0.75, 0.4, 0.2, 0.0, 0.2, 0.5, 0.5, 0.6, 0.75, 0.4, 0.2, 0.0, 0.2, 0.5, 0.5, 0.6, 0.75, 0.4, 0.2];
         room.daily_graph.data = graph;
-        room.daily_graph.last_update = new Date();
+        room.daily_graph.updated_at = new Date();
         room.save((err) =>{
           if(err){
             console.log("Error updating new data");
@@ -79,13 +79,13 @@ app.post('/api/roomdata', (req, res) => {
       }
       else{
         const current_date = new Date()
-        if(((current_date.getTime() - room.daily_graph.last_update.getTime())/1000.0)>3600){
+        if(((current_date.getTime() - room.daily_graph.updated_at.getTime())/1000.0)>3600){
 
           const datapoints = room.datapoints;
           const count = 0;
           const total = 0;
           for (var i =0; i < datapoints.length; i++){
-            if(datapoints[i].created_at > room.daily_graph.last_update){
+            if(datapoints[i].created_at > room.daily_graph.updated_at){
               total+= datapoints[i].value;
               count++;
             }
@@ -94,7 +94,7 @@ app.post('/api/roomdata', (req, res) => {
           var new_data = room.daily_graph.slice(1);
           new_data.add(average);
           room.daily_graph.data = new_data;
-          room.daily_graph.last_update = current_date;
+          room.daily_graph.updated_at = current_date;
           room.save((err)=>{
             console.log("Error updating new data");
           });
