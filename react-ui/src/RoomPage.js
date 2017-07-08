@@ -74,7 +74,6 @@ class DailyChart extends Component {
 		// updatedAt.setDay(updatedAt.getDay() - 1);
 		// console.log(updatedAt);
 
-
 		const formattedData = this.state.data.map((dp, index) => {
 			return {
 				hour: index,
@@ -93,8 +92,8 @@ class DailyChart extends Component {
 			        <VictoryAxis
 			          // tickValues specifies both the number of ticks and where
 			          // they are placed on the axis
-			          tickValues={[1, 2, 3, 4]}
-			          tickFormat={["Quarter 1", "Quarter 2", "Quarter 3", "Quarter 4"]}
+			          tickValues={[...Array(24).keys()];}
+			          // tickFormat={["Quarter 1", "Quarter 2", "Quarter 3", "Quarter 4"]}
 			        />
 			        <VictoryAxis
 			          dependentAxis
