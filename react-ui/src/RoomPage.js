@@ -38,7 +38,8 @@ class DailyChart extends Component {
 	}
 
 	componentDidMount() {
-		const query = '/api/rooms/' + this.props.roomName + '/currentDayDataPoints'
+		const query = '/api/rooms/' + this.props.roomName + '/currentDayDataPoints';
+	    console.log(query);
 	    fetch(query)
 	      .then(response => {
 	        if (!response.ok) {
@@ -157,7 +158,7 @@ class DailyPanel extends Component {
 		return (
 			<Col md={6}>
 				<Panel header={<h1>Daily Use</h1>} style={{textAlign:"center"}}>
-					<DailyChart />
+					<DailyChart roomName={roomName} />
 				</Panel>
 			</Col>
 		)
@@ -177,7 +178,6 @@ class WeeklyPanel extends Component {
 		return (
 			<Col md={6}>
 				<Panel header={<h1>Weekly Use</h1>} style={{textAlign:"center"}}>
-					<DailyChart />
 				</Panel>
 			</Col>
 		)
