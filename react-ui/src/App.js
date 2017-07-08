@@ -212,7 +212,7 @@ const muiTheme = getMuiTheme({
   },
 });
 
-class App extends Component {
+class Appppp extends Component {
   constructor(props, context) {
     super(props, context);
 
@@ -269,9 +269,36 @@ class App extends Component {
   }
 }
 
+export default class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      dataPoints: null
+    }
+  }
 
+  componentDidMount() {
+    fetch('api/roomdata')
+      .then(response => {
+        if (!response.ok) {
+          console.log('response')
+          console.log(response.status)
+          throw new Error(`status ${response.status}`);
+        }
+        return response.json();
+      }).then(json => {
+        console.log(json);
+      }).catch(e => {
+        throw e;
+      });
+  }
 
-
-
-
-export default App;
+  render() {
+    return (
+      <div>
+        <h1>boobies</h1>
+      <div>
+      );
+  }
+  
+}

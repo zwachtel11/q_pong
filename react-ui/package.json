@@ -6,10 +6,12 @@
     "react-scripts": "0.9.5"
   },
   "dependencies": {
+    "material-ui": "^0.18.6",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-router": "^4.1.1",
     "react-router-dom": "^4.1.1",
+    "react-tap-event-plugin": "^2.0.1",
     "react-vis": "^1.6.6",
     "victory": "^0.21.1"
   },
