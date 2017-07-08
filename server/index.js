@@ -88,20 +88,13 @@ app.post('/api/roomdata', (req, res) => {
 //   });
 // });
 
-// app.get('/api/roomdata', (req, res) => {
-//   res.set('Content-Type', 'application/json');
-//   DataPoint.find({}, (err, dataPoints) => {
-//     if (err) throw err;
-//     res.send(dataPoints);
-//   })
-// });
-
 app.get('/api/roomdata/:room_name', (req, res) => {
   res.set('Content-Type', 'application/json');
-  DataPoint.find({room_name: req.params.room_name}, (err, dataPoints) => {
+  const roomName = req.params.room_name;
+  Room.find({room_name: roomName}, (err, dataPoints) => {
     if (err) throw err;
     res.send(dataPoints);
-  })
+  });
 });
 
 app.get('/api/rooms', (req, res) => {

@@ -269,16 +269,19 @@ class Appppp extends Component {
   }
 }
 
+
+
+
 export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      dataPoints: null
+      rooms: null
     }
   }
 
   componentDidMount() {
-    fetch('api/roomdata')
+    fetch('api/rooms')
       .then(response => {
         if (!response.ok) {
           console.log('response')
@@ -288,6 +291,9 @@ export default class App extends Component {
         return response.json();
       }).then(json => {
         console.log(json);
+        this.setState({
+          rooms: json
+        })
       }).catch(e => {
         throw e;
       });
@@ -295,9 +301,21 @@ export default class App extends Component {
 
   render() {
     return (
-      <div>
-        <h1>boobies</h1>
-      </div>
-      );
+      <Router>
+        <div>
+          <ul>
+            <li><Link to='/'>Home</Link></li>
+            <li><Link to='/about'>About</Link></li>
+          </ul>
+          <hr />
+
+          <Route exact path="/" component={Home} />
+          <Route path="/about" component={About} />
+
+          <Chart />
+
+          </div>
+      </Router>
+    )
   }
 }
