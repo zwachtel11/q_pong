@@ -13,7 +13,7 @@ export default class MatchesPage extends Component {
     return (
       <div className="container-fluid">
       	<h1 style={{textAlign: "center"}}>Matches for room {this.props.match.params.roomName}</h1>
-        <MatchesList />
+        <MatchesList roomName={this.props.match.params.roomName} />
       </div>
     )
   }
@@ -29,7 +29,7 @@ class MatchesList extends Component {
   }
 
   componentDidMount() {
-  	const roomName = this.props.match.params.roomName;
+  	const roomName = this.props.roomName;
 
   	const query = '/api/rooms/' + roomName;
   	console.log(query);
