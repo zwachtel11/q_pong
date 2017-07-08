@@ -297,8 +297,8 @@ export default class App extends Component {
     return (
       <div>
         <h1>boobies</h1>
-      <div>
+      </div>
       );
   }
-  
+
 }
