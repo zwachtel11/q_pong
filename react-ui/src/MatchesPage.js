@@ -44,7 +44,7 @@ class MatchesList extends Component {
       }).then(json => {
         console.log(json);
         this.setState({
-          rooms: json
+          matches: json
         })
       }).catch(e => {
         throw e;
