@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { Panel, Col, Row } from 'react-bootstrap';
+import { Panel, Col, Row, Button } from 'react-bootstrap';
+import { VictoryBar, VictoryChart, VictoryAxis } from 'victory';
+
 
 export default class RoomPage extends Component {
 	constructor(props) {
@@ -13,7 +15,70 @@ export default class RoomPage extends Component {
 		const roomName = this.props.match.params.roomName;
 		return (
 			<div className="container-fluid" style={{paddingTop: "20px"}}>
-				<StatusPanel roomName={roomName}/>
+				<Row>
+					<StatusPanel roomName={roomName} />
+					<ButtonGroup roomName={roomName} />
+				</Row>
+				<Row>
+					<DailyPanel roomName={roomName} />
+					<WeeklyPanel roomName={roomName} />
+				</Row>
+			</div>
+		)
+	}
+}
+
+class DailyChart extends Component {
+	constructor() {
+		super();
+		this.state = {
+			data: null
+		}
+	}
+
+	componentDidMount() {
+	    fetch(`/api/ccc/currentDayDataPoints`)
+	      .then(response => {
+	        if (!response.ok) {
+	          console.log('response')
+	          console.log(response.status)
+	          throw new Error(`status ${response.status}`);
+	        }
+	        return response.json();
+	      }).then(json => {
+	        console.log(json);
+	        this.setState({
+	          data: json
+	        })
+	      }).catch(e => {
+	        throw e;
+	      });
+	  }
+
+	render() {
+		return (
+			<div>
+			    <VictoryChart
+			        // domainPadding will add space to each side of VictoryBar to
+			        // prevent it from overlapping the axis
+			        domainPadding={20}>
+			        <VictoryAxis
+			          // tickValues specifies both the number of ticks and where
+			          // they are placed on the axis
+			          tickValues={[1, 2, 3, 4]}
+			          tickFormat={["Quarter 1", "Quarter 2", "Quarter 3", "Quarter 4"]}
+			        />
+			        <VictoryAxis
+			          dependentAxis
+			          // tickFormat specifies how ticks should be displayed
+			          tickFormat={(x) => (`$${x / 1000}k`)}
+			        />
+			        <VictoryBar
+			          data={this.state.data}
+			          x="quarter"
+			          y="earnings"
+			        />
+			    </VictoryChart>
 			</div>
 		)
 	}
@@ -31,13 +96,32 @@ class StatusPanel extends Component {
 	render() {
 		const roomName = this.props.roomName;
 		return (
-			<Row>
-				<Col md={8}>
-					<Panel header={<h1>{roomName}</h1>} style={{textAlign:"center"}}>
-						<p>Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-					</Panel>
-				</Col>
-			</Row>
+			<Col md={8}>
+				<Panel header={<h1>{roomName}</h1>} style={{textAlign:"center"}}>
+					<Col md={4}>
+						<svg>
+							<circle cx={75} cy={75} r={75} fill="green" />
+						</svg>
+					</Col>
+					<Col md={8}>
+						<h1>OPEN</h1>
+						<p>Last Used: 10 min ago</p>
+						<p>Average Use: 25 min</p>
+					</Col>
+				</Panel>
+			</Col>
+		)
+	}
+}
+
+class ButtonGroup extends Component {
+	render() {
+		return (
+			<Col md={4}>
+				<Button block bsSize="large">Alert When Open</Button>
+				<Button block bsSize="large">Report Match</Button>
+				<Button block bsSize="large">View Match History</Button>
+			</Col>
 		)
 	}
 }
@@ -53,13 +137,31 @@ class DailyPanel extends Component {
 	render() {
 		const roomName = this.props.roomName;
 		return (
-			<Row>
-				<Col md={8}>
-					<Panel header={<h1>{roomName}</h1>} style={{textAlign:"center"}}>
-						<p>Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-					</Panel>
-				</Col>
-			</Row>
+			<Col md={6}>
+				<Panel header={<h1>Daily Use</h1>} style={{textAlign:"center"}}>
+					<DailyChart />
+				</Panel>
+			</Col>
+		)
+	}
+}
+
+class WeeklyPanel extends Component {
+	constructor(props) {
+		super(props)
+		this.state = {
+
+		}
+	}
+	
+	render() {
+		const roomName = this.props.roomName;
+		return (
+			<Col md={6}>
+				<Panel header={<h1>Weekly Use</h1>} style={{textAlign:"center"}}>
+					<DailyChart />
+				</Panel>
+			</Col>
 		)
 	}
 }
