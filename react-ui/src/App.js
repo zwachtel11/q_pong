@@ -43,8 +43,8 @@ export default class App extends Component {
         <div>
           <Route exact path="/" component={Home} />
           <Route path='/reportMatch' component={ReportMatchPage} />
-          <Route path="/rooms/:roomName" component={RoomPage} />
-          <Route path='/rooms/:roomName/matches' component={MatchesPage} />
+          <Route exact path="/rooms/:roomName" component={RoomPage} />
+          <Route exact path='/rooms/:roomName/matches' component={MatchesPage} />
           <Route path="/about" component={About} />
         </div>
       </Router>

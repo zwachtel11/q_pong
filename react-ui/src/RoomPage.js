@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import { Panel, Col, Row, Button } from 'react-bootstrap';
 import { VictoryBar, VictoryChart, VictoryAxis } from 'victory';
 
+import {
+  BrowserRouter as Router,
+  Route,
+  Link
+} from 'react-router-dom';
 
 export default class RoomPage extends Component {
 	constructor(props) {
