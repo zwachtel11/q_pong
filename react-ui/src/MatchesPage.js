@@ -11,7 +11,8 @@ import {
 export default class MatchesPage extends Component {
   render() {
     return (
-      <div>
+      <div className="container-fluid">
+      	<h1 style={{textAlign: "center"}}>Matches for room {this.props.match.params.roomName}</h1>
         <MatchesList />
       </div>
     )
@@ -19,19 +20,23 @@ export default class MatchesPage extends Component {
 }
 
 
-class RoomList extends Component {
+class MatchesList extends Component {
   constructor() {
     super() 
     this.state = {
-      rooms: null
+      matches: null
     }
   }
 
   componentDidMount() {
-    fetch('/api/rooms')
+  	const roomName = this.props.match.params.roomName;
+
+  	const query = '/api/rooms/' + roomName;
+  	console.log(query);
+    fetch('/api/rooms/')
       .then(response => {
         if (!response.ok) {
-          console.log('response')
+          console.log('response');
           console.log(response.status)
           throw new Error(`status ${response.status}`);
         }
@@ -49,14 +54,14 @@ class RoomList extends Component {
   render() {
     const mappedMatches = this.state.matches
       ? this.state.matches.map(match => {
-        return <ListGroupItem><Link to={`rooms/${match.roomName}`}>{match.roomName + " - " + room.status}</Link></ListGroupItem>
+        return <ListGroupItem>{JSON.stringify(match)}</ListGroupItem>
       })
-      : <ListGroupItem><Link to="asdf">asdf</Link></ListGroupItem>
+      : <ListGroupItem></ListGroupItem>
 
     return (
       <div className="container">
         <ListGroup>
-          {mappedRooms}
+          {mappedMatches}
         </ListGroup>
       </div>
     )
