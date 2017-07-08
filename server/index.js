@@ -197,7 +197,8 @@ app.get('/api/rooms', (req, res) => {
 app.get('/api/rooms/:room/currentDayDataPoints', (req, res) => {
   res.set('Content-Type', 'application/json');
   //User.find({ admin: true }).where('updated_at').gt(monthAgo).exec(function(err, users) {
-  Room.findOne({"room_name":req.params.room}, (err, doc) =>{
+  Room.findOne({"room_name":req.params.room}, (err, doc) => {
+    if (err) throw err;
     res.send(doc.daily_graph);
   })
 });
@@ -208,6 +209,14 @@ app.get('/api/rooms/:room/currentWeekDataPoints', (req,res) => {
 });
 
 
+app.get('api/rooms/:room/matches', (req, res)=>{
+  Match.find({'room_name':req.body.room}).sort({"created_at":-1}).exec((err, data)=>{
+    data = data.toArray();
+    if(!err){
+      res.send(data);
+    }
+  });
+});
 
 
 

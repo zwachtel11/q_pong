@@ -28,6 +28,38 @@ export default class RoomPage extends Component {
 	}
 }
 
+class ButtonGroup extends Component {
+	render() {
+		return (
+			<Col md={4}>
+				<Button block bsSize="large">Alert When Open</Button>
+				<Button block bsSize="large">Report Match</Button>
+				<Button block bsSize="large">View Match History</Button>
+			</Col>
+		)
+	}
+}
+
+class DailyPanel extends Component {
+	constructor(props) {
+		super(props)
+		this.state = {
+
+		}
+	}
+	
+	render() {
+		const roomName = this.props.roomName;
+		return (
+			<Col md={6}>
+				<Panel header={<h1>Daily Use</h1>} style={{textAlign:"center"}}>
+					<DailyChart roomName={roomName} />
+				</Panel>
+			</Col>
+		)
+	}
+}
+
 class DailyChart extends Component {
 	constructor() {
 		super();
@@ -79,7 +111,7 @@ class DailyChart extends Component {
 
 		// console.log(formattedData);
 
-		const ticks = [...Array(24).keys()].map(dp => dp+1);
+		const ticks = [...Array(4).keys()].map(dp => (dp+1) * 6);
 
 		return (
 			<div>
@@ -91,6 +123,7 @@ class DailyChart extends Component {
 			        />
 			        <VictoryAxis
 			          dependentAxis
+
 			        />
 			        <VictoryBar
 			          data={formattedData}
@@ -133,54 +166,4 @@ class StatusPanel extends Component {
 	}
 }
 
-class ButtonGroup extends Component {
-	render() {
-		return (
-			<Col md={4}>
-				<Button block bsSize="large">Alert When Open</Button>
-				<Button block bsSize="large">Report Match</Button>
-				<Button block bsSize="large">View Match History</Button>
-			</Col>
-		)
-	}
-}
-
-class DailyPanel extends Component {
-	constructor(props) {
-		super(props)
-		this.state = {
-
-		}
-	}
-	
-	render() {
-		const roomName = this.props.roomName;
-		return (
-			<Col md={6}>
-				<Panel header={<h1>Daily Use</h1>} style={{textAlign:"center"}}>
-					<DailyChart roomName={roomName} />
-				</Panel>
-			</Col>
-		)
-	}
-}
-
-class WeeklyPanel extends Component {
-	constructor(props) {
-		super(props)
-		this.state = {
-
-		}
-	}
-	
-	render() {
-		const roomName = this.props.roomName;
-		return (
-			<Col md={6}>
-				<Panel header={<h1>Weekly Use</h1>} style={{textAlign:"center"}}>
-				</Panel>
-			</Col>
-		)
-	}
-}
 
