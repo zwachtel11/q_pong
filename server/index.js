@@ -8,9 +8,6 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-// Priority serve any static files.
-app.use(express.static(path.resolve(__dirname, '../react-ui/build')));
-
 /*
   Set up mongo
 */
@@ -39,13 +36,17 @@ app.post('/api/roomdata', (req, res) => {
   console.log(req.body);
   const dp = DataPoint({
     value: req.body.value,
-    room_name: req.body.value, 
+    room_name: req.body.room_name,
     created_at: new Date()
   });
 
   dp.save(err => {
-    if (err) throw err;
+    if (err) {
+      throw err;
+      res.send("Error");
+    }
     console.log("saved dat bitch");
+    res.send("Posted dat bitch");
   });
 });
 
@@ -74,7 +75,9 @@ app.get('/api/roomdata/:room_name', (req, res) => {
 //     res.send(dataPoints);
 //   })
 // })
-  
+
+// Priority serve any static files.
+app.use(express.static(path.resolve(__dirname, '../react-ui/build')));
 
 
 /**
