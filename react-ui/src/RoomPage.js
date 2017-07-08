@@ -98,12 +98,11 @@ class DailyChart extends Component {
 			        <VictoryAxis
 			          dependentAxis
 			          // tickFormat specifies how ticks should be displayed
-			          tickFormat={(x) => (`$${x / 1000}k`)}
 			        />
 			        <VictoryBar
 			          data={formattedData}
-			          x="quarter"
-			          y="earnings"
+			          x="Hour"
+			          y="Value"
 			        />
 			    </VictoryChart>
 			</div>
