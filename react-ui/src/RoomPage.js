@@ -32,7 +32,8 @@ class DailyChart extends Component {
 	constructor() {
 		super();
 		this.state = {
-			data: null
+			data: null,
+			updatedAt:null
 		}
 	}
 
@@ -48,7 +49,8 @@ class DailyChart extends Component {
 	      }).then(json => {
 	        console.log(json);
 	        this.setState({
-	          data: json
+	          data: json.data,
+	          updatedAt: json.updated_at
 	        })
 	      }).catch(e => {
 	        throw e;
@@ -59,6 +61,25 @@ class DailyChart extends Component {
 		if (!this.state.data) {
 			return <div></div>
 		}
+
+		// const data = [
+		//   {quarter: 1, earnings: 13000},
+		//   {quarter: 2, earnings: 16500},
+		//   {quarter: 3, earnings: 14250},
+		//   {quarter: 4, earnings: 19000}
+		// ];
+		console.log(updatedAt);
+		updatedAt.setDay(updatedAt.getDay() - 1);
+		console.log(updatedAt;)
+
+
+		// const formattedData = this.state.data.map((dp, index) => {
+		// 	return {
+		// 		hour: ,
+		// 		value: 
+		// 	}
+		// });
+
 		return (
 			<div>
 			    <VictoryChart
