@@ -116,7 +116,7 @@ class WeeklyChart extends Component {
 
 		// console.log(formattedData);
 
-		const ticks = [...Array(7).keys()].map(dp => dp+1);
+		const ticks = [...Array(7).keys()].map(dp => dp);
 
 		return (
 			<div>
