@@ -275,7 +275,7 @@ class StatusPanel extends Component {
 		const roomName = this.props.roomName;
 		console.log("this.state.occupied");
 		console.log(this.state.occupied);
-		if (!this.state.occupied) {
+		if (this.state.occupied !== 0 || this.state.occupied !== 1) {
 			return <div></div>;
 		}
 
