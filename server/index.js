@@ -163,6 +163,11 @@ app.get('/api/:room/currentDayDataPoints', (req, res) => {
   })
 });
 
+app.get('/api/:room/currentWeekDataPoints', (req,res) => {
+  res.set('Content-Type', 'application/json');
+  res.send([0.0, 0.2, 0.5, 0.5, 0.6, 0.75, 0.4, 0.2, 0.0, 0.2, 0.5, 0.5, 0.6, 0.75, 0.4, 0.2, 0.0, 0.2, 0.5, 0.5, 0.6, 0.75, 0.4, 0.2]);
+})
+
 
 
 /**
