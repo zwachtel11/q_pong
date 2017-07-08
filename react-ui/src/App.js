@@ -154,21 +154,21 @@ class Home extends Component {
   }
 
   render() {
-
     const mappedRooms = this.state.rooms
       ? this.state.rooms.map(room => {
         return <li>{room.roomName + " - " + room.status}</li>
       })
       : <li>asdf</li>
 
-
-    <div>
-      <ul>
-        {mappedRooms}
-      </ul>
-      <Chart />
-      }
-    </div>
+    return (
+      <div>
+        <ul>
+          {mappedRooms}
+        </ul>
+        <Chart />
+        }
+      </div>
+    )
   }
 
 }
