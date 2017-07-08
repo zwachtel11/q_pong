@@ -125,41 +125,13 @@ class Appppp extends Component {
   }
 }
 
-const Home = () => (
-  <div>
-    {this.state.rooms ?
-      <h1>chill bitch im loading</h1>
-      : <h2>{JSON.stringify(this.state.rooms)}</h2>
-    }
-    <Chart />
-  </div>
-)
 
-const About = () => (
-  <div>
-    <h2>About</h2>
-  </div>
-)
-
-export default class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
+class Home extends Component {
+  constructor() {
+    super() {
       rooms: null
     }
   }
-
-  // fetch('/api/dataPoints', {
-  //     method: 'post',
-  //     body: JSON.stringify(dp),
-  //     headers: {
-  //               "Content-Type": "application/json"
-  //           }
-  //   }).then(res => {
-  //     return res.json();
-  //   }).then(json => {
-  //     console.log(json);
-  //   })
 
   componentDidMount() {
     fetch('/api/rooms')
@@ -179,6 +151,42 @@ export default class App extends Component {
         throw e;
       });
   }
+
+  render() {
+    <div>
+      {this.state.rooms ?
+        <h1>chill bitch im loading</h1>
+        : <h2>{JSON.stringify(this.state.rooms)}</h2>
+      }
+      <Chart />
+    </div>
+  }
+
+
+
+}
+
+const About = () => (
+  <div>
+    <h2>About</h2>
+  </div>
+)
+
+export default class App extends Component {
+
+  // fetch('/api/dataPoints', {
+  //     method: 'post',
+  //     body: JSON.stringify(dp),
+  //     headers: {
+  //               "Content-Type": "application/json"
+  //           }
+  //   }).then(res => {
+  //     return res.json();
+  //   }).then(json => {
+  //     console.log(json);
+  //   })
+
+  
 
   // <li><Link to='/'>Home</Link></li>
   // <li><Link to='/about'>About</Link></li>
