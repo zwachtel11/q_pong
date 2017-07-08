@@ -25,10 +25,39 @@ var Schema = mongoose.Schema;
 const dataPointSchema = new Schema({
   value: Number,
   created_at: Date,
+});
+
+const roomSchema = new Schema({
+  data_points: [DataPoint],
   room_name: String
 });
 
+const Room = mongoose.model('Room', roomSchema);
 const DataPoint = mongoose.model('DataPoint', dataPointSchema);
+
+app.post('/api/roomdata', (req, res) => {
+  res.set('Content-Type', 'application/json');
+
+  const roomName = req.body.room_name;
+
+  const dp = DataPoint({
+    value: req.body.value,
+    created_at: new Date()
+  });
+
+  Room.findAndUpdate({room_name: roomName}, {$push:{data_points: dp}}, {safe: true, upsert: true}, (err, model) => {
+    if (err) {
+      console.log("err");
+      res.send({message:"error"});
+    }
+    console.log("Success");
+    res.send({message: "Success"});
+  });
+});
+
+
+
+
 
 app.post('/api/roomdata', (req, res) => {
   res.set('Content-Type', 'application/json');
@@ -36,7 +65,6 @@ app.post('/api/roomdata', (req, res) => {
   console.log(req.body);
   const dp = DataPoint({
     value: req.body.value,
-    room_name: req.body.room_name,
     created_at: new Date()
   });
 
@@ -64,6 +92,11 @@ app.get('/api/roomdata/:room_name', (req, res) => {
     if (err) throw err;
     res.send(dataPoints);
   })
+});
+
+app.get('/api/rooms', (req, res) => {
+  res.set('Content-Type', 'application/json');
+  DataPoint.aggregate({})
 });
 
 
