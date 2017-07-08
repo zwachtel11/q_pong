@@ -231,7 +231,6 @@ app.get('/api/rooms/matches/:room', (req, res) => {
     if (err) throw err;
     console.log("found matches for room");
     console.log(data);
-    data = data.toArray();
     res.send(data);
   });
 });
