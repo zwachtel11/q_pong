@@ -2,6 +2,12 @@ import React, { Component } from 'react';
 
 import { ListGroup, ListGroupItem, Jumbotron } from 'react-bootstrap';
 
+import {
+  BrowserRouter as Router,
+  Route,
+  Link
+} from 'react-router-dom';
+
 export default class Home extends Component {
   render() {
     return (
@@ -46,9 +52,9 @@ class RoomList extends Component {
   render() {
     const mappedRooms = this.state.rooms
       ? this.state.rooms.map(room => {
-        return <ListGroupItem>{room.roomName + " - " + room.status}</ListGroupItem>
+        return <ListGroupItem><Link to={room.roomName}>{room.roomName + " - " + room.status}</Link></ListGroupItem>
       })
-      : <ListGroupItem>asdf</ListGroupItem>
+      : <ListGroupItem><Link to="asdf">asdf</Link></ListGroupItem>
 
     return (
       <div className="container">
