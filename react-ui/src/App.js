@@ -212,9 +212,9 @@ export default class App extends Component {
         <Route exact path="/" component={Home} />
         <Route path="/about" component={About} />
         <div>
-          {this.state.rooms ?
+          {this.state.roomNames ?
             <h1>chill bitch im loading</h1>
-            : <
+            : <h2>{JSON.stringify(this.state.rooms)}</h2>
           }
 
 
