@@ -109,8 +109,7 @@ app.post('/api/roomdata', (req, res) => {
       else{
         const current_date = new Date()
         if(((current_date.getTime() - room.daily_graph.updated_at.getTime())/1000.0)>3600){
-
-          const datapoints = room.datapoints;
+          const datapoints = room.data_points;
           const count = 0;
           const total = 0;
           for (var i =0; i < datapoints.length; i++){
