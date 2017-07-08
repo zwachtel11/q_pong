@@ -83,6 +83,9 @@ class DailyChart extends Component {
 
 		console.log(formattedData);
 
+		const tick = [...Array(24).keys()].map(dp => dp+1);
+
+		console.log(tick);
 		return (
 			<div>
 			    <VictoryChart
@@ -92,7 +95,7 @@ class DailyChart extends Component {
 			        <VictoryAxis
 			          // tickValues specifies both the number of ticks and where
 			          // they are placed on the axis
-			          tickValues={[...Array(24).keys()]}
+			          tickValues={tick}
 			          // tickFormat={["Quarter 1", "Quarter 2", "Quarter 3", "Quarter 4"]}
 			        />
 			        <VictoryAxis
