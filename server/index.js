@@ -97,14 +97,19 @@ app.get('/api/roomdata/:room_name', (req, res) => {
   });
 });
 
-app.get('/api/roomnames', (req, res) => {
+app.get('/api/rooms', (req, res) => {
   res.set('Content-Type', 'application/json');
   Room.find({}, (err, rooms) => {
     if (err) throw err;
     console.log(rooms);
-    const roomNames = rooms.map(room => room.room_name);
-    console.log(roomNames)
-    res.send({room_names: roomNames});
+    const roomData = rooms.map(room => {
+      return {
+        roomName: room.room_name,
+        status: Math.random() > .5 ? 1 : 0
+      }
+    });
+    console.log(roomData)
+    res.send(roomData);
   })
 });
 
