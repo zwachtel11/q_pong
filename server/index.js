@@ -226,23 +226,23 @@ app.get('/api/rooms/:room/currentDayDataPoints', (req, res) => {
   })
 });
 
+app.get('/api/rooms/matches/:room', (req, res) => {
+  Match.find({room_name:req.params.room}, (err, data) => {
+    if (err) throw err;
+    console.log("found matches for room");
+    console.log(data);
+    data = data.toArray();
+    res.send(data);
+  });
+});
+
 app.get('/api/rooms/:room/currentWeekDataPoints', (req,res) => {
   res.set('Content-Type', 'application/json');
   res.send([0.0, 0.2, 0.5, 0.5, 0.6, 0.75, 0.4, 0.2, 0.0, 0.2, 0.5, 0.5, 0.6, 0.75, 0.4, 0.2, 0.0, 0.2, 0.5, 0.5, 0.6, 0.75, 0.4, 0.2]);
 });
 
 
-app.get('api/rooms/matches/:room', (req, res) => {
-  Match.find({'room_name':req.params.room}, (err, data) => {
-    if (err) throw err;
 
-    console.log("found matches for room");
-    console.log(data);
-    data = data.toArray();
-    res.send(data);
-    
-  });
-});
 
 
 
