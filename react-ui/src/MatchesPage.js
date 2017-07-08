@@ -52,9 +52,19 @@ class MatchesList extends Component {
   }
 
   render() {
-    const mappedMatches = this.state.matches
+  	if (!this.state.matches) {
+  		return <div></div>
+  	}
+
+  	const sortedMatches = this.state.matches.sort((a,b) => a.created_at > b.created_at );
+
+  	console.log(sortedMatches)
+
+    const mappedMatches = sortedMatches
       ? this.state.matches.map(match => {
-        return <ListGroupItem>{JSON.stringify(match)}</ListGroupItem>
+        // return <ListGroupItem>{JSON.stringify(match)}</ListGroupItem>
+        	return <ListGroupItem>{match.p1_name} {match.p1_score} - {match.p2_score} {match.p2_name}</ListGroupItem>
+
       })
       : <ListGroupItem></ListGroupItem>
 
