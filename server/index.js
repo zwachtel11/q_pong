@@ -91,15 +91,19 @@ app.post('/api/roomdata', (req, res) => {
 app.get('/api/roomdata/:room_name', (req, res) => {
   res.set('Content-Type', 'application/json');
   const roomName = req.params.room_name;
-  Room.find({room_name: roomName}, (err, dataPoints) => {
+  Room.find({room_name: roomName}, (err, room) => {
     if (err) throw err;
-    res.send(dataPoints);
+    res.send(room);
   });
 });
 
 app.get('/api/rooms', (req, res) => {
   res.set('Content-Type', 'application/json');
-  // DataPoint.aggregate({})
+  Room.find({}, (err, rooms) => {
+    if (err) throw err;
+    const roomNames = rooms.map(room => room_name);
+    res.send(roomNames);
+  })
 });
 
 
