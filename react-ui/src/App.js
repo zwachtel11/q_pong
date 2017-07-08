@@ -11,114 +11,6 @@ import ReactDOM from 'react-dom';
 import {VictoryBar, VictoryChart, VictoryAxis} from 'victory';
 // import { DataPointService } from './Services/Services.js'
 
-class Appp extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      message: null,
-      fetching: true
-    };
-  }
-
-  componentDidMount() {
-    // fetch('/api')
-    //   .then(response => {
-    //     if (!response.ok) {
-    //       throw new Error(`status ${response.status}`);
-    //     }
-    //     return response.json();
-    //   })
-    //   .then(json => {
-    //     this.setState({
-    //       message: json.message,
-    //       fetching: false
-    //     });
-    //   }).catch(e => {
-    //     this.setState({
-    //       message: `API call failed: ${e}`,
-    //       fetching: false
-    //     });
-    //   })
-
-    fetch('api/currentWeekDataPoints')
-      .then(response => {
-        if (!response.ok) {
-          console.log('response')
-          console.log(response.status)
-          throw new Error(`status ${response.status}`);
-        }
-        return response.json();
-      }).then(json => {
-        console.log(json);
-      }).catch(e => {
-        throw e;
-      })
-
-
-    // fetch('/api/users')
-    //   .then(response => {
-    //     if (!response.ok) {
-    //       throw new Error(`status ${response.status}`);
-    //     }
-    //     return response.json();
-    //   })
-    //   .then(json => {
-    //     console.log(json);
-    //   })
-    //   .catch(e => {
-    //     console.log(e);
-    //   })
-  }
-
-  createDataPoint = () => {
-    console.log("boom");
-
-    const dp = {
-      value: Math.random() * 10
-    };
-
-    console.log(dp);
-
-    fetch('/api/dataPoints', {
-      method: 'post',
-      body: JSON.stringify(dp),
-      headers: {
-                "Content-Type": "application/json"
-            }
-    }).then(res => {
-      return res.json();
-    }).then(json => {
-      console.log(json);
-    })
-
-  }
-
-  render() {
-    return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          {'This is '}
-          <a href="https://github.com/mars/heroku-cra-node">
-            {'create-react-app with a custom Node/Express server'}
-          </a><br/>
-        </p>
-        <p className="App-intro">
-          {this.state.fetching
-            ? 'Fetching message from API'
-            : this.state.message}
-        </p>
-        <div>
-          <input type="submit" className="btn" onClick={this.createDataPoint} value="Create Data Point" />
-        </div>
-      </div>
-    );
-  }
-}
-
 const Home = () => (
   <div>
     <h2>Home</h2>
@@ -280,8 +172,20 @@ export default class App extends Component {
     }
   }
 
+  // fetch('/api/dataPoints', {
+  //     method: 'post',
+  //     body: JSON.stringify(dp),
+  //     headers: {
+  //               "Content-Type": "application/json"
+  //           }
+  //   }).then(res => {
+  //     return res.json();
+  //   }).then(json => {
+  //     console.log(json);
+  //   })
+
   componentDidMount() {
-    fetch('api/rooms')
+    fetch('/api/rooms')
       .then(response => {
         if (!response.ok) {
           console.log('response')
@@ -299,22 +203,23 @@ export default class App extends Component {
       });
   }
 
+  // <li><Link to='/'>Home</Link></li>
+  // <li><Link to='/about'>About</Link></li>
+
   render() {
     return (
       <Router>
+        <Route exact path="/" component={Home} />
+        <Route path="/about" component={About} />
         <div>
-          <ul>
-            <li><Link to='/'>Home</Link></li>
-            <li><Link to='/about'>About</Link></li>
-          </ul>
-          <hr />
+          {this.state.rooms ?
+            <h1>chill bitch im loading</h1>
+            : <
+          }
 
-          <Route exact path="/" component={Home} />
-          <Route path="/about" component={About} />
 
           <Chart />
-
-          </div>
+        </div>
       </Router>
     )
   }

@@ -97,12 +97,14 @@ app.get('/api/roomdata/:room_name', (req, res) => {
   });
 });
 
-app.get('/api/rooms', (req, res) => {
+app.get('/api/roomnames', (req, res) => {
   res.set('Content-Type', 'application/json');
   Room.find({}, (err, rooms) => {
     if (err) throw err;
-    const roomNames = rooms.map(room => room_name);
-    res.send(roomNames);
+    console.log(rooms);
+    const roomNames = rooms.map(room => room.room_name);
+    console.log(roomNames)
+    res.send({room_names: roomNames});
   })
 });
 
