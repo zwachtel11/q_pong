@@ -38,7 +38,7 @@ class ButtonGroup extends Component {
 		return (
 			<Col md={4}>
 				<Link to="/reportmatch"><Button block bsSize="large">Report Match</Button></Link>
-				<Link to="/"><Button block bsSize="large">View Match History</Button></Link>
+				<Link to={`/matches/${this.props.roomName}`}><Button block bsSize="large">View Match History</Button></Link>
 			</Col>
 		)
 	}

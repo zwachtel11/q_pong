@@ -44,7 +44,7 @@ export default class App extends Component {
           <Route exact path="/" component={Home} />
           <Route path='/reportMatch' component={ReportMatchPage} />
           <Route exact path="/rooms/:roomName" component={RoomPage} />
-          <Route exact path='/rooms/:roomName/matches' component={MatchesPage} />
+          <Route exact path='/matches/:roomName' component={MatchesPage} />
           <Route path="/about" component={About} />
         </div>
       </Router>

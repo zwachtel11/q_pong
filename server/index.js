@@ -118,7 +118,7 @@ app.post('/api/roomdata', (req, res) => {
               count++;
             }
           }
-          var average = count / float(total);
+          var average = count / total;
           var new_data = room.daily_graph.slice(1);
           new_data.add(average);
           room.daily_graph.data = new_data;
