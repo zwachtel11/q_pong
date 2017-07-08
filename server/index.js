@@ -18,6 +18,20 @@ app.use(bodyParser.urlencoded({extended: true}));
 
   var Schema = mongoose.Schema;
 
+  const matchSchema = new Schema({
+    p1_name:String,
+    p1_email:String,
+    p1_score:Number,
+    p2_name:String,
+    p2_email:String,
+    p2_score:Number,
+    room_name:String
+  });
+
+  const Match = mongoose.model('Match', matchSchema);
+
+
+
 /**
   Datapoints
   */
@@ -108,6 +122,23 @@ app.post('/api/roomdata', (req, res) => {
 });
 
 
+app.post('/api/matches', (req, res)=>{
+  var match = new Match({
+    'p1_name':req.body.p1_name,
+    'p1_email':req.body.p1_email,
+    'p1_score':req.body.p1_score,
+    'p2_name':req.body.p2_name,
+    'p2_email':req.body.p2_email,
+    'p2_score':req.body.p2_score,
+    'room_name':req.body.room_name
+  });
+  match.save((err)=>{
+    if(err){
+      console.log("Error reporting match.")
+    }
+    res.send({message:"Success"});
+  })
+})
 
 
 
