@@ -232,12 +232,15 @@ app.get('/api/rooms/:room/currentWeekDataPoints', (req,res) => {
 });
 
 
-app.get('api/rooms/:room/matches', (req, res) => {
+app.get('api/rooms/matches/:room', (req, res) => {
   Match.find({'room_name':req.params.room}, (err, data) => {
+    if (err) throw err;
+
+    console.log("found matches for room");
+    console.log(data);
     data = data.toArray();
-    if(!err){
-      res.send(data);
-    }
+    res.send(data);
+    
   });
 });
 
