@@ -107,26 +107,26 @@ app.post('/api/roomdata', (req, res) => {
         })
       }
       else{
-        const current_date = new Date()
+        var current_date = new Date()
         if(((current_date.getTime() - room.daily_graph.updated_at.getTime())/1000.0)>3600){
-          const datapoints = room.data_points;
-          const count = 0;
-          const total = 0;
+          var datapoints = room.data_points;
+          var count = 0;
+          var total = 0;
           for (var i =0; i < datapoints.length; i++){
             if(datapoints[i].created_at > room.daily_graph.updated_at){
               total+= datapoints[i].value;
               count++;
             }
           }
-          const average = count / float(total);
+          var average = count / float(total);
           var new_data = room.daily_graph.slice(1);
           new_data.add(average);
           room.daily_graph.data = new_data;
           room.daily_graph.updated_at = current_date;
           if(req.body.value == 0){
             if(room.occupied == 1){
-              const time_elapsed = currentDate - room.last_open;
-              const new_avg = (time_elapsed + room.average_use_time*room.average_use_time_count)/(room.average_use_time_count+1);
+              var time_elapsed = currentDate - room.last_open;
+              var new_avg = (time_elapsed + room.average_use_time*room.average_use_time_count)/(room.average_use_time_count+1);
               room.average_use_time_count+=1;
               room.average_use_time = new_avg;
             }

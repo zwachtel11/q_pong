@@ -37,8 +37,8 @@ class ButtonGroup extends Component {
 	render() {
 		return (
 			<Col md={4}>
-				<Link to="/"><Button block bsSize="large">Report Match</Button></Link>
-				<Button block bsSize="large">View Match History</Button>
+				<Link to="/reportmatch"><Button block bsSize="large">Report Match</Button></Link>
+				<Link to="/"><Button block bsSize="large">View Match History</Button></Link>
 			</Col>
 		)
 	}
