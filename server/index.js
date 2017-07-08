@@ -119,7 +119,7 @@ app.post('/api/roomdata', (req, res) => {
             }
           }
           var average = count / total;
-          var new_data = room.daily_graph.slice(1);
+          var new_data = room.daily_graph.data.slice(1);
           new_data.add(average);
           room.daily_graph.data = new_data;
           room.daily_graph.updated_at = current_date;
