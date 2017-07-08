@@ -133,6 +133,7 @@ class WeeklyChart extends Component {
 			        />
 			        <VictoryBar
 			          data={formattedData}
+			          style={{ data: { fill: "#005cb3" } }}
 			          x="hour"
 			          y="value"
 			        />
@@ -231,6 +232,7 @@ class DailyChart extends Component {
 			        />
 			        <VictoryBar
 			          data={formattedData}
+			          style={{ data: { fill: "#005cb3" } }}
 			          x="hour"
 			          y="value"
 			        />
