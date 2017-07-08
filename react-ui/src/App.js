@@ -9,42 +9,6 @@ import {
 
 import ReactDOM from 'react-dom';
 import {VictoryBar, VictoryChart, VictoryAxis} from 'victory';
-// import { DataPointService } from './Services/Services.js'
-
-const Home = () => (
-  <div>
-    <h2>Home</h2>
-  </div>
-)
-
-const About = () => (
-  <div>
-    <h2>About</h2>
-  </div>
-)
-
-class Apppp extends Component {
-  render() {
-    return (
-      <Router>
-        <div>
-          <ul>
-            <li><Link to='/'>Home</Link></li>
-            <li><Link to='/about'>About</Link></li>
-
-          </ul>
-          <hr />
-
-          <Route exact path="/" component={Home} />
-          <Route path="/about" component={About} />
-
-          <Chart />
-
-          </div>
-      </Router>
-    )
-  }
-}
 
 const data = [
   {quarter: 1, earnings: 13000},
@@ -161,8 +125,21 @@ class Appppp extends Component {
   }
 }
 
+const Home = () => (
+  <div>
+    {this.state.rooms ?
+      <h1>chill bitch im loading</h1>
+      : <h2>{JSON.stringify(this.state.rooms)}</h2>
+    }
+    <Chart />
+  </div>
+)
 
-
+const About = () => (
+  <div>
+    <h2>About</h2>
+  </div>
+)
 
 export default class App extends Component {
   constructor(props) {
@@ -211,15 +188,6 @@ export default class App extends Component {
       <Router>
         <Route exact path="/" component={Home} />
         <Route path="/about" component={About} />
-        <div>
-          {this.state.roomNames ?
-            <h1>chill bitch im loading</h1>
-            : <h2>{JSON.stringify(this.state.rooms)}</h2>
-          }
-
-
-          <Chart />
-        </div>
       </Router>
     )
   }
