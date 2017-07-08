@@ -43,10 +43,10 @@ app.post('/api/roomdata', (req, res) => {
   dp.save(err => {
     if (err) {
       throw err;
-      res.send("Error");
+      res.send({message: "Error"});
     }
     console.log("saved dat bitch");
-    res.send("Posted dat bitch");
+    res.send({message: "Success"});
   });
 });
 
@@ -76,13 +76,17 @@ app.get('/api/roomdata/:room_name', (req, res) => {
 //   })
 // })
 
-// Priority serve any static files.
-app.use(express.static(path.resolve(__dirname, '../react-ui/build')));
-
 
 /**
  End Datapoints
 */
+
+/**
+
+*/
+
+// Priority serve any static files.
+app.use(express.static(path.resolve(__dirname, '../react-ui/build')));
 
 
 // All remaining requests return the React app, so it can handle routing.
