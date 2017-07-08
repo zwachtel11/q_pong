@@ -86,6 +86,14 @@ app.post('/api/roomdata', (req, res) => {
     }
     Room.findOne({'room_name':roomName}, (err, room) => {
       // console.log(room.daily_graph.data.length);
+
+      if(!room.average_use_time){
+        room.average_use_time =  0;
+        room.average_use_time_count =0;
+        room.last_open = new Date()
+      }
+
+
       if(room.daily_graph.data.length == 0){
         const graph = [0.0, 0.2, 0.5, 0.5, 0.6, 0.75, 0.4, 0.2, 0.0, 0.2, 0.5, 0.5, 0.6, 0.75, 0.4, 0.2, 0.0, 0.2, 0.5, 0.5, 0.6, 0.75, 0.4, 0.2];
         const currentDate = new Date();
@@ -118,7 +126,7 @@ app.post('/api/roomdata', (req, res) => {
               count++;
             }
           }
-          var average = count / total;
+          var average = total / count;
           var new_data = room.daily_graph.data.slice(1);
           new_data.push(average);
           room.daily_graph.data = new_data;

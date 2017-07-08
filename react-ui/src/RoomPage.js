@@ -273,9 +273,10 @@ class StatusPanel extends Component {
 
 	render() {
 		const roomName = this.props.roomName;
-
+		console.log("this.state.occupied");
+		console.log(this.state.occupied);
 		if (!this.state.occupied) {
-			return null;
+			return <div></div>;
 		}
 
 		return (
