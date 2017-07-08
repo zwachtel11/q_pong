@@ -84,7 +84,7 @@ export default class ReportMatchPage extends Component {
 					<Col md={2}></Col>
 					<Col md={8}>
 						<FormGroup>
-							<FormControl type="text" placeholder="Name" name="roomName" value={this.state.roomName} onChange={this.onValueChanged} />
+							<FormControl type="text" placeholder="Room Name" name="roomName" value={this.state.roomName} onChange={this.onValueChanged} />
 						</FormGroup>
 					</Col>
 					<Col md={2}></Col>

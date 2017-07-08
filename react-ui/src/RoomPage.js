@@ -116,12 +116,12 @@ class WeeklyChart extends Component {
 
 		// console.log(formattedData);
 
-		const ticks = [...Array(7).keys()].map(dp => dp);
+		const ticks = [...Array(7).keys()].map(dp => dp+1);
 
 		return (
 			<div>
 			    <VictoryChart
-			        domainPadding={20} >
+			        domainPadding={40} >
 			        <VictoryAxis
 			          tickValues={ticks}
 			          label="Days"
@@ -281,7 +281,7 @@ class StatusPanel extends Component {
 		console.log("this.state.occupied");
 		console.log(this.state.occupied);
 		if (this.state.occupied === null) {
-			return <div>fuck this shit</div>;
+			return <div></div>;
 		}
 
 		return (

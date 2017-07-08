@@ -66,7 +66,7 @@ class MatchesList extends Component {
     const mappedMatches = sortedMatches
       ? this.state.matches.map(match => {
         // return <ListGroupItem>{JSON.stringify(match)}</ListGroupItem>
-        	return <ListGroupItem>{match.p1_name} {match.p1_score} - {match.p2_score} {match.p2_name} on {match.created_at}</ListGroupItem>
+        	return <ListGroupItem>{match.p1_name} {match.p1_score} - {match.p2_score} {match.p2_name}</ListGroupItem>
 
       })
       : <ListGroupItem></ListGroupItem>
