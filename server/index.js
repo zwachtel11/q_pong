@@ -54,8 +54,12 @@ app.use(bodyParser.urlencoded({extended: true}));
       data:[Number],
       updated_at: Date
     },
-    occupied:Number
+    occupied:Number,
+    last_open:Date,
+    average_use_time:Number,
+    average_use_time_count:Number
   });
+
 
   const Room = mongoose.model('Room', roomSchema);
 
@@ -63,6 +67,86 @@ app.post('/api/roomdata', (req, res) => {
     res.set('Content-Type', 'application/json');
 
     const roomName = req.body.room_name;
+
+  // const dp = DataPoint({
+  //   value: req.body.value,
+  //   created_at: new Date()
+  // });
+
+  const dp = {
+    value: req.body.value,
+    created_at: new Date()
+  };
+
+
+  Room.findOneAndUpdate({room_name: roomName}, {$push:{data_points: dp}, $set:{occupied:req.body.value}}, {safe: true, upsert: true}, (err, model) => {
+    if (err) {
+      console.log("err");
+      res.send({message:"error"});
+    }
+    Room.findOne({'room_name':roomName}, (err, room) => {
+      // console.log(room.daily_graph.data.length);
+      if(room.daily_graph.data.length == 0){
+        const graph = [0.0, 0.2, 0.5, 0.5, 0.6, 0.75, 0.4, 0.2, 0.0, 0.2, 0.5, 0.5, 0.6, 0.75, 0.4, 0.2, 0.0, 0.2, 0.5, 0.5, 0.6, 0.75, 0.4, 0.2];
+        const currentDate = new Date();
+        room.daily_graph.data = graph;
+        room.daily_graph.updated_at = currentDate;
+        if(req.body.value == 0){
+          if(room.occupied == 1){
+            const time_elapsed = currentDate - room.last_open;
+            const new_avg = (time_elapsed + room.average_use_time*room.average_use_time_count)/(room.average_use_time_count+1);
+            room.average_use_time_count+=1;
+            room.average_use_time = new_avg;
+          }
+          room.last_open = currentDate;
+        }
+        room.save((err) =>{
+          if(err){
+            console.log("Error updating new data");
+          }
+        })
+      }
+      else{
+        const current_date = new Date()
+        if(((current_date.getTime() - room.daily_graph.updated_at.getTime())/1000.0)>3600){
+
+          const datapoints = room.datapoints;
+          const count = 0;
+          const total = 0;
+          for (var i =0; i < datapoints.length; i++){
+            if(datapoints[i].created_at > room.daily_graph.updated_at){
+              total+= datapoints[i].value;
+              count++;
+            }
+          }
+          const average = count / float(total);
+          var new_data = room.daily_graph.slice(1);
+          new_data.add(average);
+          room.daily_graph.data = new_data;
+          room.daily_graph.updated_at = current_date;
+          if(req.body.value == 0){
+            if(room.occupied == 1){
+              const time_elapsed = currentDate - room.last_open;
+              const new_avg = (time_elapsed + room.average_use_time*room.average_use_time_count)/(room.average_use_time_count+1);
+              room.average_use_time_count+=1;
+              room.average_use_time = new_avg;
+            }
+            room.last_open = currentDate;
+          }
+          room.save((err)=>{
+            console.log("Error updating new data");
+          });
+        }
+      } 
+      console.log("Success");
+      res.send({message: "Success"});
+    });
+  });
+});
+
+
+
+
 
   // const dp = DataPoint({
   //   value: req.body.value,
@@ -199,6 +283,11 @@ app.get('/api/rooms/:room/currentWeekDataPoints', (req,res) => {
   res.set('Content-Type', 'application/json');
   res.send([0.0, 0.2, 0.5, 0.5, 0.6, 0.75, 0.4, 0.2, 0.0, 0.2, 0.5, 0.5, 0.6, 0.75, 0.4, 0.2, 0.0, 0.2, 0.5, 0.5, 0.6, 0.75, 0.4, 0.2]);
 })
+
+
+
+
+
 
 
 
