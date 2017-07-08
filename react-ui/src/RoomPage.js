@@ -56,7 +56,7 @@ class WeeklyPanel extends Component {
 		const roomName = this.props.roomName;
 		return (
 			<Col md={6}>
-				<Panel header={<h1>Daily Use</h1>} style={{textAlign:"center"}}>
+				<Panel header={<h1>Weekly Use</h1>} style={{textAlign:"center"}}>
 					<WeeklyChart roomName={roomName} />
 				</Panel>
 			</Col>
@@ -87,8 +87,7 @@ class WeeklyChart extends Component {
 	      }).then(json => {
 	        console.log(json);
 	        this.setState({
-	          data: json.data,
-	          updatedAt: json.updated_at
+	          data: json,
 	        })
 	      }).catch(e => {
 	        throw e;

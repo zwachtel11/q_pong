@@ -237,7 +237,7 @@ app.get('/api/rooms/matches/:room', (req, res) => {
 
 app.get('/api/rooms/:room/currentWeekDataPoints', (req,res) => {
   res.set('Content-Type', 'application/json');
-  res.send([0.0, 0.2, 0.5, 0.5, 0.6, 0.75, 0.4, 0.2, 0.0, 0.2, 0.5, 0.5, 0.6, 0.75, 0.4, 0.2, 0.0, 0.2, 0.5, 0.5, 0.6, 0.75, 0.4, 0.2]);
+  res.send([0.0, .5, 0.2, 0.3, 0.5, 0.8, 0.0]);
 });
 
 
