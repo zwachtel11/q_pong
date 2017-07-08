@@ -133,7 +133,8 @@ app.post('/api/roomdata', (req, res) => {
             room.last_open = currentDate;
           }
           room.save((err)=>{
-            console.log("Error updating new data");
+            if (err) throw err;
+            console.log("Success go team!");
           });
         }
       } 
