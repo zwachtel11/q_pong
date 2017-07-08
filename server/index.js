@@ -211,7 +211,7 @@ app.get('/api/rooms/:roomname', (req, res) => {
         roomName: room.room_name,
         occupied: room.occupied,
         averageUseTime: room.average_use_time,
-        lastOpen: room.lastOpen
+        lastOpen: room.last_open
     });
   })
 });

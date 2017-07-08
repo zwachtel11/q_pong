@@ -244,7 +244,6 @@ class StatusPanel extends Component {
 			occupied: null,
 			lastOpen: null,
 			averageUseTime:null
-
 		}
 	}
 
@@ -299,7 +298,6 @@ class StatusPanel extends Component {
 							<p>Last Open: {this.state.lastOpen}</p>
 							<p>Average Use: {this.state.averageUseTime}</p>
 						</div>
-
 					}
 					</Col>
 				</Panel>
