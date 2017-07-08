@@ -233,7 +233,7 @@ app.get('/api/rooms/:room/currentWeekDataPoints', (req,res) => {
 
 
 app.get('api/rooms/:room/matches', (req, res)=>{
-  Match.find({'room_name':req.body.room}).sort({"created_at":-1}).exec((err, data)=>{
+  Match.find({'room_name':req.params.room}).sort({"created_at":-1}).exec((err, data)=>{
     data = data.toArray();
     if(!err){
       res.send(data);
