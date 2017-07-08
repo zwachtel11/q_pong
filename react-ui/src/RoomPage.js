@@ -75,12 +75,14 @@ class DailyChart extends Component {
 		console.log(updatedAt);
 
 
-		// const formattedData = this.state.data.map((dp, index) => {
-		// 	return {
-		// 		hour: ,
-		// 		value: 
-		// 	}
-		// });
+		const formattedData = this.state.data.map((dp, index) => {
+			return {
+				hour: index
+				value: dp
+			}
+		});
+
+		console.log(formattedData);
 
 		return (
 			<div>
@@ -100,7 +102,7 @@ class DailyChart extends Component {
 			          tickFormat={(x) => (`$${x / 1000}k`)}
 			        />
 			        <VictoryBar
-			          data={this.state.data}
+			          data={formattedData}
 			          x="quarter"
 			          y="earnings"
 			        />
