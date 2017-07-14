@@ -86,75 +86,89 @@ app.post('/api/roomdata', (req, res) => {
     }
     Room.findOne({'room_name':roomName}, (err, room) => {
       // console.log(room.daily_graph.data.length);
-
-      if(!room.average_use_time){
+      //null check for first time a datapoint is added to a room
+      if(!room.average_use_time) { 
         room.average_use_time =  0;
-        room.average_use_time_count =0;
-        room.last_open = new Date()
-      }
-
-
-      if(room.daily_graph.data.length == 0){
-        const graph = [0.0, 0.2, 0.5, 0.5, 0.6, 0.75, 0.4, 0.2, 0.0, 0.2, 0.5, 0.5, 0.6, 0.75, 0.4, 0.2, 0.0, 0.2, 0.5, 0.5, 0.6, 0.75, 0.4, 0.2];
-        const currentDate = new Date();
-        room.daily_graph.data = graph;
+        room.average_use_time_count = 1; // one sample in the database
+        room.last_open = dp.create_at;
+        const currentDate = dp.created_at;
+        room.daily_graph.data = [0.0, 0.2, 0.5, 0.5, 0.6, 0.75, 0.4, 0.2, 0.0, 0.2, 0.5, 0.5, 0.6, 0.75, 0.4, 0.2, 0.0, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1];
         room.daily_graph.updated_at = currentDate;
-        if(req.body.value == 0){
-          if(room.occupied == 1){
-            const time_elapsed = currentDate - room.last_open;
-            const new_avg = (time_elapsed + room.average_use_time*room.average_use_time_count)/(room.average_use_time_count+1);
-            room.average_use_time_count+=1;
-            room.average_use_time = new_avg;
-          }
-          room.last_open = currentDate;
-        }
+        room.occupied = dp.value;
+
+        // if(req.body.value == 0) { //room currently not in use
+        //   if(room.occupied == 1) { //room was in use last datapoint
+        //     const time_elapsed = currentDate - room.last_open;
+        //     const new_avg = (time_elapsed + room.average_use_time*room.average_use_time_count)/(room.average_use_time_count+1);
+        //     room.average_use_time_count += 1;
+        //     room.average_use_time = new_avg;
+        //     room.occupied = 0;
+        //     room.last_open = currentDate;
+        //   }
+        // }
         room.save((err) =>{
           if(err){
             console.log("Error updating new data");
           }
+          res.status(200).end();
         })
-      }
-      else{
-        var currentDate = new Date()
-        if(((currentDate.getTime() - room.daily_graph.updated_at.getTime())/1000.0)>3600){
+      } else {
+        var currentDate = new Date();
+        // if the daily graph hasn't been updated in 60 minutes (3600 seconds)
+        if(((currentDate.getTime() - room.daily_graph.updated_at.getTime())/1000.0) > 3600) {
           var datapoints = room.data_points;
-          var count = 0;
-          var total = 0;
-          for (var i =0; i < datapoints.length; i++){
-            if(datapoints[i].created_at > room.daily_graph.updated_at){
-              total+= datapoints[i].value;
-              count++;
-            }
-          }
+          room.data_points = []; // we can clear out the array once we have downsampled to a single hourly datapoint
+          // var count = 0;
+          // var total = 0;
+
+          const total = datapoints.reduce((prevVal, elem) => { return prevVal + elem.value }, 0);
+          const count = datapoints.length;
+
+          // for (var i =0; i < datapoints.length; i++){
+          //   // if(datapoints[i].created_at > room.daily_graph.updated_at){
+          //     total+= datapoints[i].value;
+          //     count++;
+          //   // }
+          // }
           var average = total / count;
-          var new_data = room.daily_graph.data.slice(1);
-          new_data.push(average);
+          var new_data = room.daily_graph.data.slice(1); // [0] | [1,...23] slices off the first value
+          new_data.push(average); // [1...23]|[average]
           room.daily_graph.data = new_data;
           room.daily_graph.updated_at = currentDate;
-          if(req.body.value == 0) {
-            if(room.occupied == 1) {
+
+          // if it went from occupied to open - we need to calculate time elapsed
+
+          //open -> open
+            //set last_open to now
+
+          //open -> occupied
+            //nothing
+          //occupied -> open
+            //set time elapsed and everything else
+          //occupied -> occupied
+            //nothing
+
+          if(dp.value == 0) { // if room is currently empty
+            if(room.occupied == 1) { // if room was just occupied
+              // now we need to update time elapsed
               var time_elapsed = currentDate - room.last_open;
               var new_avg = (time_elapsed + room.average_use_time*room.average_use_time_count)/(room.average_use_time_count+1);
-              room.average_use_time_count += 1;
+              room.average_use_time_count += 1; //count the number of samples in the average
               room.average_use_time = new_avg;
             }
             room.last_open = currentDate;
           }
-          room.save((err)=>{
+          room.save((err) => {
             if (err) throw err;
-            console.log("Success go team!");
+            console.log("Successfully saved room data!");
           });
         }
       } 
-      console.log("Success");
-      res.send({message: "Success"});
+      console.log("Successfully posted point");
+      res.status(200).end();
     });
   });
 });
-
-
-
-
 
 
 app.post('/api/matches', (req, res) => {
