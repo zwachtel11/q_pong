@@ -115,8 +115,8 @@ app.post('/api/roomdata', (req, res) => {
         })
       }
       else{
-        var current_date = new Date()
-        if(((current_date.getTime() - room.daily_graph.updated_at.getTime())/1000.0)>3600){
+        var currentDate = new Date()
+        if(((currentDate.getTime() - room.daily_graph.updated_at.getTime())/1000.0)>3600){
           var datapoints = room.data_points;
           var count = 0;
           var total = 0;
@@ -130,12 +130,12 @@ app.post('/api/roomdata', (req, res) => {
           var new_data = room.daily_graph.data.slice(1);
           new_data.push(average);
           room.daily_graph.data = new_data;
-          room.daily_graph.updated_at = current_date;
-          if(req.body.value == 0){
-            if(room.occupied == 1){
+          room.daily_graph.updated_at = currentDate;
+          if(req.body.value == 0) {
+            if(room.occupied == 1) {
               var time_elapsed = currentDate - room.last_open;
               var new_avg = (time_elapsed + room.average_use_time*room.average_use_time_count)/(room.average_use_time_count+1);
-              room.average_use_time_count+=1;
+              room.average_use_time_count += 1;
               room.average_use_time = new_avg;
             }
             room.last_open = currentDate;
