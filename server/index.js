@@ -87,7 +87,7 @@ app.post('/api/roomdata', (req, res) => {
     Room.findOne({'room_name':roomName}, (err, room) => {
       // console.log(room.daily_graph.data.length);
       //null check for first time a datapoint is added to a room
-      if(!room.average_use_time) { 
+      if(!room.daily_graph) { 
         room.average_use_time =  0;
         room.average_use_time_count = 1; // one sample in the database
         room.last_open = dp.create_at;
