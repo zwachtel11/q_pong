@@ -221,6 +221,8 @@ class DailyChart extends Component {
 			const t = moment(this.state.updatedAt).subtract(index, 'hours');
 			console.log(t.calendar());
 			return t.calendar();
+		}).filter((dp, index) => {
+			return index % 6 == 0;
 		});
 
 
