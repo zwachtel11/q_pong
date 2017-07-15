@@ -220,9 +220,10 @@ class DailyChart extends Component {
 		const timeTicks = this.state.data.map((dp, index) => {
 			const t = moment(this.state.updatedAt).subtract(index, 'hours');
 			return t.fromNow();
-		}).filter((dp, index) => {
-			return index % 6 == 0;
-		});
+		})
+		// .filter((dp, index) => {
+		// 	return index % 6 == 0;
+		// });
 
 		console.log(timeTicks);
 
@@ -234,6 +235,7 @@ class DailyChart extends Component {
 			        <VictoryAxis
 			          fixLabelOverlap={true}
 			          tickValues={timeTicks}
+			          tickFormat={(t) => t.toString()}
 			          label="Hours"
 			          // tickFormat={["Quarter 1", "Quarter 2", "Quarter 3", "Quarter 4"]}
 			        />
