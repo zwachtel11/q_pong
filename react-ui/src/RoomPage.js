@@ -208,7 +208,7 @@ class DailyChart extends Component {
 
 		const formattedData = this.state.data.map((dp, index) => {
 			return {
-				hour: index,
+				hour: index + 1,
 				value: dp
 			}
 		});
@@ -219,11 +219,12 @@ class DailyChart extends Component {
 
 		const timeTicks = this.state.data.map((dp, index) => {
 			const t = moment(this.state.updatedAt).subtract(index, 'hours');
-			console.log(t.fromNow());
 			return t.fromNow();
 		}).filter((dp, index) => {
 			return index % 6 == 0;
 		});
+
+		console.log(timeTicks);
 
 
 		return (
