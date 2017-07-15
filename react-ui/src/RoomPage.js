@@ -232,6 +232,7 @@ class DailyChart extends Component {
 			    <VictoryChart
 			        domainPadding={20} >
 			        <VictoryAxis
+			          fixLabelOverlap={true}
 			          tickValues={timeTicks}
 			          label="Hours"
 			          // tickFormat={["Quarter 1", "Quarter 2", "Quarter 3", "Quarter 4"]}
