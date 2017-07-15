@@ -217,10 +217,14 @@ class DailyChart extends Component {
 
 		const ticks = [...Array(4).keys()].map(dp => (dp) * 6);
 
-		const timeTicks = this.state.data.map((dp, index) => {
-			const t = moment(this.state.updatedAt).subtract(index, 'hours');
-			return t.fromNow();
-		}).reverse();
+		// const timeTicks = this.state.data.map((dp, index) => {
+		// 	const t = moment(this.state.updatedAt).subtract(index, 'hours');
+		// 	return t.fromNow();
+		// }).reverse();
+
+		const timeTicks = formattedData
+			.map(dp => moment(this.state.updatedAt).subtract(index, 'hours')).reverse()
+
 		// .filter((dp, index) => {
 		// 	return index % 6 == 0;
 		// });
