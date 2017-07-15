@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Panel, Col, Row, Button } from 'react-bootstrap';
 import { VictoryBar, VictoryChart, VictoryAxis } from 'victory';
+var moment = require('moment');
 
 import {
   BrowserRouter as Router,
@@ -216,12 +217,19 @@ class DailyChart extends Component {
 
 		const ticks = [...Array(4).keys()].map(dp => (dp) * 6);
 
+		const timeTicks = this.state.data.map((dp, index) => {
+			const t = moment(this.state.updatedAt).subtract(index, 'hours');
+			console.log(t);
+			return t;
+		});
+
+
 		return (
 			<div>
 			    <VictoryChart
 			        domainPadding={20} >
 			        <VictoryAxis
-			          tickValues={ticks}
+			          tickValues={timeTicks}
 			          label="Hours"
 			          // tickFormat={["Quarter 1", "Quarter 2", "Quarter 3", "Quarter 4"]}
 			        />

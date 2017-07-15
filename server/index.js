@@ -86,6 +86,7 @@ app.post('/api/roomdata', (req, res) => {
     }
     Room.findOne({'room_name':roomName}, (err, room) => {
       // console.log(room.daily_graph.data.length);
+
       //null check for first time a datapoint is added to a room
       if(!room.daily_graph) { 
         room.average_use_time =  0;
@@ -124,7 +125,7 @@ app.post('/api/roomdata', (req, res) => {
           const total = datapoints.reduce((prevVal, elem) => { return prevVal + elem.value }, 0);
           const count = datapoints.length;
 
-          // for (var i =0; i < datapoints.length; i++){
+          // for (var i =0; i < datapoints.length; i++) {
           //   // if(datapoints[i].created_at > room.daily_graph.updated_at){
           //     total+= datapoints[i].value;
           //     count++;
