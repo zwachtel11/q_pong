@@ -1,5 +1,48 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  /*font-family: sans-serif;*/
+  font-family: 'Exo 2', sans-serif;
+  /*font-family: 'Acme', sans-serif;*/
+  /*font-family: 'Montserrat Alternates', sans-serif;*/
+}
+
+.panel h1 {
+	font-size: 30px;
+}
+
+.panel .panel-heading {
+	background: #005cb3;
+	color:white;
+}
+
+.row-group .col-md-4 .panel {
+	height: 237px;
+}
+
+.row-group .col-md-8 .panel {
+	height: 237px;
+}
+
+.panel {
+  text-align: center;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  border: none;
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
+.panel:hover {
+	  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+.navbar {
+	margin: 0px;
+    border: 0px;
+    background: #005cb3;
+    border-radius: 0px;
+    color: white;
+}
+
+.navbar span {
+	color:white;
 }

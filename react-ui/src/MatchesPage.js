@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { ListGroup, ListGroupItem, Jumbotron } from 'react-bootstrap';
+import { ListGroup, ListGroupItem, Jumbotron, Table } from 'react-bootstrap';
 
 import {
   BrowserRouter as Router,
@@ -70,6 +70,33 @@ class MatchesList extends Component {
 
       })
       : <ListGroupItem></ListGroupItem>
+
+    const mappedMatchRows = sortedMatches.map(match => 
+      <tr>
+        <td>{match.time}</td>
+        <td>{match.p1_name}</td>
+        <td>{match.p1_score}</td>
+        <td>{match.p2_score}</td>
+        <td>{match.p2_name}</td>
+      </tr>
+    )
+
+    return (
+      <Table hover>
+        <thead>
+          <tr>
+            <th>Time</th>
+            <th>Player 1</th>
+            <th>P1 Score</th>
+            <th>P2 Score</th>
+            <th>Player 2</th>
+          </tr>
+        </thead>
+        <tbody>
+          {mappedMatchRows}
+        </tbody>
+      </Table>
+    )
 
     return (
       <div className="container">

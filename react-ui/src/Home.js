@@ -16,7 +16,9 @@ export default class Home extends Component {
       <div>
         <Jumbotron style={{background:"#005cb3"}}>
           <div style={{textAlign:"center"}}><img src={logo2} width={300} height={300} style={{textAlign:"center"}} /></div>
-          <h1 style={{textAlign: "center", color:"white"}}>Welcome to Q Ping Pong</h1>
+          <h1 style={{textAlign: "center", color:"white"}}>Welcome to QPong</h1>
+          <h3 style={{textAlign: "center", color:"white"}}>Built with Room CheQ</h3>
+
         </Jumbotron>
         <RoomList />
       </div>

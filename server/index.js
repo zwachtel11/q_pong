@@ -25,7 +25,8 @@ app.use(bodyParser.urlencoded({extended: true}));
     p2_name:String,
     p2_email:String,
     p2_score:Number,
-    room_name:String
+    room_name:String,
+    time: Date
   });
 
   const Match = mongoose.model('Match', matchSchema);
@@ -209,7 +210,8 @@ app.post('/api/matches', (req, res) => {
     'p2_name':req.body.p2_name,
     'p2_email':req.body.p2_email,
     'p2_score':req.body.p2_score,
-    'room_name':req.body.room_name
+    'room_name':req.body.room_name,
+    'time': new Date()
   });
   match.save((err)=>{
     if(err){

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Panel, Col, Row, Button } from 'react-bootstrap';
 import { VictoryBar, VictoryChart, VictoryAxis } from 'victory';
-
+import './index.css';
 import {BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer} from 'recharts';
 
 import {
@@ -24,7 +24,7 @@ export default class RoomPage extends Component {
 		const roomName = this.props.match.params.roomName;
 		return (
 			<div className="container-fluid" style={{paddingTop: "20px"}}>
-				<Row>
+				<Row className='row-group'>
 					<StatusPanel roomName={roomName} />
 					<ButtonGroup roomName={roomName} />
 				</Row>
@@ -41,8 +41,10 @@ class ButtonGroup extends Component {
 	render() {
 		return (
 			<Col md={4}>
-				<Link to="/reportmatch"><Button block bsSize="large">Report Match</Button></Link>
-				<Link to={`/matches/${this.props.roomName}`}><Button block bsSize="large">View Match History</Button></Link>
+				<Panel header={<h1>Buttons</h1>}>
+					<Link to="/reportmatch"><Button block bsSize="large">Report Match</Button></Link>
+					<Link to={`/matches/${this.props.roomName}`}><Button block bsSize="large">View Match History</Button></Link>
+				</Panel>
 			</Col>
 		)
 	}
@@ -97,6 +99,11 @@ class WeeklyChart extends Component {
 	      }).catch(e => {
 	        throw e;
 	      });
+	    const data = [...Array(7).keys()].map(dp => .5);
+		this.setState({
+			data: data,
+			updatedAt: moment()
+		})
 	  }
 
 	render() {
@@ -113,7 +120,7 @@ class WeeklyChart extends Component {
 		const formattedData = this.state.data.map((dp, index) => {
 			return {
 				// hour: index + 1,
-				day: moment(this.state.updatedAt).subtract(6-index, 'days').fromNow(),
+				day: moment(this.state.updatedAt).subtract(6-index, 'days').format('ddd'),
 				value: dp
 			}
 		});
@@ -121,7 +128,7 @@ class WeeklyChart extends Component {
 		return (
 			<ResponsiveContainer width='100%' height="100%" aspect={4.0/2.0}>
 				<BarChart data={formattedData}>
-					<Bar dataKey={'value'} fill="#005cb3" />
+					<Bar dataKey={'value'} fill="#ff9900" />
 					<XAxis dataKey='day' />
 					<YAxis domain={[0,1]} />
 				</BarChart>
@@ -180,7 +187,7 @@ class DailyChart extends Component {
 	        throw e;
 	      });
 
-		const data = [...Array(24).keys()].map(dp => .1);
+		const data = [...Array(24).keys()].map(dp => 10);
 		this.setState({
 			data: data,
 			updatedAt: moment()
@@ -193,16 +200,10 @@ class DailyChart extends Component {
 			return <div></div>
 		}
 
-		const updatedAt = this.state.updatedAt;
-
-		// console.log(updatedAt);
-		// updatedAt.setDay(updatedAt.getDay() - 1);
-		// console.log(updatedAt);
-
 		const formattedData = this.state.data.map((dp, index) => {
 			return {
 				// hour: index + 1,
-				hour: moment(this.state.updatedAt).subtract(23-index, 'hours').fromNow(),
+				hour: moment(this.state.updatedAt).subtract(23-index, 'hours').format('h a'),
 				value: dp
 			}
 		});
@@ -210,9 +211,9 @@ class DailyChart extends Component {
 		return (
 			<ResponsiveContainer width='100%' height="100%" aspect={4.0/2.0}>
 				<BarChart data={formattedData}>
-					<Bar dataKey={'value'} fill="#005cb3" />
+					<Bar dataKey={'value'} fill="#ff9900" />
 					<XAxis dataKey='hour' />
-					<YAxis domain={[0,1]} />
+					<YAxis domain={[0,60]} />
 				</BarChart>
 			</ResponsiveContainer>
 		)
@@ -257,9 +258,9 @@ class StatusPanel extends Component {
 		const roomName = this.props.roomName;
 		console.log("this.state.occupied");
 		console.log(this.state.occupied);
-		if (this.state.occupied === null) {
-			return <div></div>;
-		}
+		// if (this.state.occupied === null) {
+		// 	return <div></div>;
+		// }
 
 		return (
 			<Col md={8}>
@@ -276,11 +277,11 @@ class StatusPanel extends Component {
 						<div>
 							<h1>OCCUPIED</h1>
 							<p>Last Open: {moment(this.state.lastOpen).calendar()}</p>
-							<p>Average Use: {this.state.averageUseTime}</p>
+							<p>Average Use: {this.state.averageUseTime} minutes</p>
 						</div> : 
 						<div>
 							<h1>OPEN</h1>
-							<p>Average Use: {this.state.averageUseTime}</p>
+							<p>Average Use: {this.state.averageUseTime} minutes</p>
 						</div>
 					}
 					</Col>
