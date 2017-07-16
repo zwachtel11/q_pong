@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Panel, Col, Row, Button } from 'react-bootstrap';
 import { VictoryBar, VictoryChart, VictoryAxis } from 'victory';
 
-import {BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend} from 'recharts';
+import {BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer} from 'recharts';
 
 import {
   BrowserRouter as Router,
@@ -195,11 +195,11 @@ class DailyChart extends Component {
 	        throw e;
 	      });
 
-		// const data = [...Array(24).keys()].map(dp => .1);
-		// this.setState({
-		// 	data: data,
-		// 	updatedAt: moment()
-		// })
+		const data = [...Array(24).keys()].map(dp => .1);
+		this.setState({
+			data: data,
+			updatedAt: moment()
+		})
 
 	  }
 
@@ -217,62 +217,31 @@ class DailyChart extends Component {
 		const formattedData = this.state.data.map((dp, index) => {
 			return {
 				// hour: index + 1,
-				hour: moment(this.state.updatedAt).subtract(24-index, 'hours').fromNow(),
+				hour: moment(this.state.updatedAt).subtract(23-index, 'hours').fromNow(),
 				value: dp
 			}
 		});
 
-		// console.log(formattedData);
-
-		const ticks = [...Array(4).keys()].map(dp => (dp) * 6);
-
-		// const timeTicks = this.state.data.map((dp, index) => {
-		// 	const t = moment(this.state.updatedAt).subtract(index, 'hours');
-		// 	return t.fromNow();
-		// }).reverse();
-
-		const timeTicks = formattedData
-			.map(dp => moment(this.state.updatedAt).subtract(dp.hour, 'hours').fromNow()).reverse()
-			.filter((dp, index) => {
-				return index % 6 == 0;
-			});
-
-		console.log(timeTicks);
+		const AxisLabel = ({ axisType, x, y, width, height, stroke, children }) => {
+		  const isVert = axisType === 'yAxis';
+		  const cx = isVert ? x : x + (width / 2);
+		  const cy = isVert ? (height / 2) + y : y + height + 10;
+		  const rot = isVert ? `270 ${cx} ${cy}` : 0;
+		  return (
+		    <text x={cx} y={cy} transform={`rotate(${rot})`} textAnchor="middle" stroke={stroke}>
+		      {children}
+		    </text>
+		  );
+		};
 
 		return (
-			<div>
-				<BarChart width={500} height={400} data={formattedData}>
-					<Bar dataKey={'value'} />
+			<ResponsiveContainer width='100%' height="100%" aspect={4.0/2.0}>
+				<BarChart data={formattedData}>
+					<Bar dataKey={'value'} fill="#005cb3" />
 					<XAxis dataKey='hour' />
-					<YAxis />
+					<YAxis domain={[0,1]} />
 				</BarChart>
-			</div>
-		)
-
-		return (
-			<div>
-			    <VictoryChart
-			        domainPadding={50} >
-			        <VictoryAxis
-			          fixLabelOverlap={true}
-			          tickValues={timeTicks}
-			          tickFormat={(t) => t.toString()}
-			          label="Hours"
-			          // tickFormat={["Quarter 1", "Quarter 2", "Quarter 3", "Quarter 4"]}
-			        />
-			        <VictoryAxis
-			          dependentAxis
-			          label="% Utilization"
-
-			        />
-			        <VictoryBar
-			          data={formattedData}
-			          style={{ data: { fill: "#005cb3" } }}
-			          x="hour"
-			          y="value"
-			        />
-			      </VictoryChart>
-			</div>
+			</ResponsiveContainer>
 		)
 	}
 }
