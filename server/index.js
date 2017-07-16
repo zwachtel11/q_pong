@@ -85,12 +85,14 @@ app.post('/api/roomdata', (req, res) => {
 
       //null check for first time a datapoint is added to a room
       if (!room.weekly_graph || !room.daily_graph) {
+        console.log("no weekly or daily");
 
         if (!room.weekly_graph) {
+          console.log('no weekly');
           room.weekly_graph.data = [.1,.1,.1,.1,.1,.1,.1];
           room.weekly_graph.updated_at = dp.created_at;
           console.log('no weekly graph');
-          room.save((err) =>{
+          room.save((err) => {
             if(err){
               console.log("Error updating week data");
             }
@@ -125,6 +127,7 @@ app.post('/api/roomdata', (req, res) => {
           })
         }
       } else {
+        console.log('else');
         var currentDate = new Date();
 
         //if the weekly graph hasnt't been updated in 1 day
