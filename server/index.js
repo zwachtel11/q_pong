@@ -84,6 +84,8 @@ app.post('/api/roomdata', (req, res) => {
       // console.log(room.daily_graph.data.length);
 
       //null check for first time a datapoint is added to a room
+      console.log('heres the weekly graph');
+      console.log(room.weekly_graph);
       if (!room.weekly_graph || !room.daily_graph) {
         console.log("no weekly or daily");
 
