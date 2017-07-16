@@ -223,7 +223,7 @@ class DailyChart extends Component {
 		// }).reverse();
 
 		const timeTicks = formattedData
-			.map(dp => moment(this.state.updatedAt).subtract(dp.hour, 'hours')).fromNow().reverse()
+			.map(dp => moment(this.state.updatedAt).subtract(dp.hour, 'hours').fromNow()).reverse()
 
 		// .filter((dp, index) => {
 		// 	return index % 6 == 0;
