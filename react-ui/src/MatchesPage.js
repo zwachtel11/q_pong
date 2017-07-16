@@ -14,7 +14,7 @@ const moment = require('moment');
 export default class MatchesPage extends Component {
   render() {
     return (
-      <div className="container-fluid">
+      <div className="container">
       	<h1 style={{textAlign: "center"}}>Matches for room {this.props.match.params.roomName}</h1>
         <MatchesList roomName={this.props.match.params.roomName} />
       </div>
@@ -63,14 +63,6 @@ class MatchesList extends Component {
 
   	console.log(sortedMatches)
 
-    const mappedMatches = sortedMatches
-      ? this.state.matches.map(match => {
-        // return <ListGroupItem>{JSON.stringify(match)}</ListGroupItem>
-        	return <ListGroupItem>{match.p1_name} {match.p1_score} - {match.p2_score} {match.p2_name}</ListGroupItem>
-
-      })
-      : <ListGroupItem></ListGroupItem>
-
     const mappedMatchRows = sortedMatches.map(match => 
       <tr>
         <td>{match.time}</td>
@@ -96,14 +88,6 @@ class MatchesList extends Component {
           {mappedMatchRows}
         </tbody>
       </Table>
-    )
-
-    return (
-      <div className="container">
-        <ListGroup>
-          {mappedMatches}
-        </ListGroup>
-      </div>
     )
   }
 
