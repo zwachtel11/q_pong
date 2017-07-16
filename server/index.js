@@ -36,14 +36,6 @@ app.use(bodyParser.urlencoded({extended: true}));
   Datapoints
   */
 
-  const dataPointSchema = new Schema({
-    value: Number,
-    created_at: Date,
-  });
-
-  const DataPoint = mongoose.model('DataPoint', dataPointSchema);
-
-
   const roomSchema = new Schema({
     data_points: [{
       value: Number,
@@ -51,6 +43,10 @@ app.use(bodyParser.urlencoded({extended: true}));
     }],
     room_name: String,
     daily_graph: {
+      data:[Number],
+      updated_at: Date
+    },
+    weekly_graph: {
       data:[Number],
       updated_at: Date
     },
@@ -88,6 +84,12 @@ app.post('/api/roomdata', (req, res) => {
       // console.log(room.daily_graph.data.length);
 
       //null check for first time a datapoint is added to a room
+      if (!room.weekly_graph) {
+        room.weekly_graph.data = [.1,.1,.1,.1,.1,.1,.1];
+        room.weekly_graph.updated_at = dp.created_at;
+      }
+
+
       if(!room.daily_graph) { 
         room.average_use_time =  0;
         room.average_use_time_count = 1; // one sample in the database
@@ -115,6 +117,20 @@ app.post('/api/roomdata', (req, res) => {
         })
       } else {
         var currentDate = new Date();
+
+        //if the weekly graph hasnt't been updated in 1 day
+        if(((currentDate.getTime() - room.weekly_graph.updated_at.getTime())/1000.0) > 3600*24) {
+          //condense daily graph to a single point average
+          const dailyAverage = room.daily_graph.data.reduce((sum, val) => sum + val) / 24;
+          console.log(dailyAverage);
+
+          const newWeek = room.weekly_graph.data.slice(1);
+          newWeek.push(dailyAverage);
+          room.weekly_graph = newWeek;
+          room.weekly_graph.updated_at = currentDate;
+        }
+
+
         // if the daily graph hasn't been updated in 60 minutes (3600 seconds)
         if(((currentDate.getTime() - room.daily_graph.updated_at.getTime())/1000.0) > 3600) {
           var datapoints = room.data_points;
@@ -122,7 +138,7 @@ app.post('/api/roomdata', (req, res) => {
           // var count = 0;
           // var total = 0;
 
-          const total = datapoints.reduce((prevVal, elem) => { return prevVal + elem.value }, 0);
+          const total = datapoints.reduce((sum, elem) => { return sum + elem.value }, 0);
           const count = datapoints.length;
 
           // for (var i =0; i < datapoints.length; i++) {
@@ -170,7 +186,6 @@ app.post('/api/roomdata', (req, res) => {
     });
   });
 });
-
 
 app.post('/api/matches', (req, res) => {
   var match = new Match({
@@ -241,6 +256,15 @@ app.get('/api/rooms/:room/currentDayDataPoints', (req, res) => {
   })
 });
 
+app.get('/api/rooms/:room/currentWeekDataPoints', (req, res) => {
+  res.set('Content-Type', 'application/json');
+  //User.find({ admin: true }).where('updated_at').gt(monthAgo).exec(function(err, users) {
+  Room.findOne({"room_name":req.params.room}, (err, doc) => {
+    if (err) throw err;
+    res.send(doc.weekly_graph);
+  })
+});
+
 app.get('/api/rooms/matches/:room', (req, res) => {
   Match.find({room_name:req.params.room}, (err, data) => {
     if (err) throw err;
@@ -249,17 +273,6 @@ app.get('/api/rooms/matches/:room', (req, res) => {
     res.send(data);
   });
 });
-
-app.get('/api/rooms/:room/currentWeekDataPoints', (req,res) => {
-  res.set('Content-Type', 'application/json');
-  res.send([.1, .5, 0.2, 0.3, 0.5, 0.8, 0.1]);
-});
-
-
-
-
-
-
 
 
 

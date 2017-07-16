@@ -91,7 +91,8 @@ class WeeklyChart extends Component {
 	      }).then(json => {
 	        console.log(json);
 	        this.setState({
-	          data: json,
+	          data: json.data,
+	          updatedAt: json.updated_at
 	        })
 	      }).catch(e => {
 	        throw e;
@@ -111,36 +112,20 @@ class WeeklyChart extends Component {
 
 		const formattedData = this.state.data.map((dp, index) => {
 			return {
-				hour: index+1,
+				// hour: index + 1,
+				day: moment(this.state.updatedAt).subtract(6-index, 'days').fromNow(),
 				value: dp
 			}
 		});
 
-		// console.log(formattedData);
-
-		const ticks = [...Array(7).keys()].map(dp => dp+1);
-
 		return (
-			<div>
-			    <VictoryChart
-			        domainPadding={20} >
-			        <VictoryAxis
-			          tickValues={ticks}
-			          label="Days"
-			          // tickFormat={["Quarter 1", "Quarter 2", "Quarter 3", "Quarter 4"]}
-			        />
-			        <VictoryAxis
-			          dependentAxis
-			          label="% Utilization"
-			        />
-			        <VictoryBar
-			          data={formattedData}
-			          style={{ data: { fill: "#005cb3" } }}
-			          x="hour"
-			          y="value"
-			        />
-			      </VictoryChart>
-			</div>
+			<ResponsiveContainer width='100%' height="100%" aspect={4.0/2.0}>
+				<BarChart data={formattedData}>
+					<Bar dataKey={'value'} fill="#005cb3" />
+					<XAxis dataKey='day' />
+					<YAxis domain={[0,1]} />
+				</BarChart>
+			</ResponsiveContainer>
 		)
 	}
 }
@@ -222,18 +207,6 @@ class DailyChart extends Component {
 			}
 		});
 
-		const AxisLabel = ({ axisType, x, y, width, height, stroke, children }) => {
-		  const isVert = axisType === 'yAxis';
-		  const cx = isVert ? x : x + (width / 2);
-		  const cy = isVert ? (height / 2) + y : y + height + 10;
-		  const rot = isVert ? `270 ${cx} ${cy}` : 0;
-		  return (
-		    <text x={cx} y={cy} transform={`rotate(${rot})`} textAnchor="middle" stroke={stroke}>
-		      {children}
-		    </text>
-		  );
-		};
-
 		return (
 			<ResponsiveContainer width='100%' height="100%" aspect={4.0/2.0}>
 				<BarChart data={formattedData}>
@@ -307,7 +280,6 @@ class StatusPanel extends Component {
 						</div> : 
 						<div>
 							<h1>OPEN</h1>
-							<p>Last Open: {moment(this.state.lastOpen).calendar()}</p>
 							<p>Average Use: {this.state.averageUseTime}</p>
 						</div>
 					}
