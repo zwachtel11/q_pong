@@ -87,6 +87,13 @@ app.post('/api/roomdata', (req, res) => {
       if (!room.weekly_graph) {
         room.weekly_graph.data = [.1,.1,.1,.1,.1,.1,.1];
         room.weekly_graph.updated_at = dp.created_at;
+        console.log('no weekly graph');
+        room.save((err) =>{
+          if(err){
+            console.log("Error updating week data");
+          }
+          res.status(200).end();
+        })
       }
 
 
