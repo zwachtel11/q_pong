@@ -84,44 +84,46 @@ app.post('/api/roomdata', (req, res) => {
       // console.log(room.daily_graph.data.length);
 
       //null check for first time a datapoint is added to a room
-      if (!room.weekly_graph) {
-        room.weekly_graph.data = [.1,.1,.1,.1,.1,.1,.1];
-        room.weekly_graph.updated_at = dp.created_at;
-        console.log('no weekly graph');
-        room.save((err) =>{
-          if(err){
-            console.log("Error updating week data");
-          }
-          res.status(200).end();
-        })
-      }
+      if (!room.weekly_graph || !room.daily_graph) {
 
+        if (!room.weekly_graph) {
+          room.weekly_graph.data = [.1,.1,.1,.1,.1,.1,.1];
+          room.weekly_graph.updated_at = dp.created_at;
+          console.log('no weekly graph');
+          room.save((err) =>{
+            if(err){
+              console.log("Error updating week data");
+            }
+            res.status(200).end();
+          })
+        }
 
-      if(!room.daily_graph) { 
-        room.average_use_time =  0;
-        room.average_use_time_count = 1; // one sample in the database
-        room.last_open = dp.create_at;
-        const currentDate = dp.created_at;
-        room.daily_graph.data = [0.0, 0.2, 0.5, 0.5, 0.6, 0.75, 0.4, 0.2, 0.0, 0.2, 0.5, 0.5, 0.6, 0.75, 0.4, 0.2, 0.0, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1];
-        room.daily_graph.updated_at = currentDate;
-        room.occupied = dp.value;
+        if(!room.daily_graph) { 
+          room.average_use_time =  0;
+          room.average_use_time_count = 1; // one sample in the database
+          room.last_open = dp.create_at;
+          const currentDate = dp.created_at;
+          room.daily_graph.data = [0.0, 0.2, 0.5, 0.5, 0.6, 0.75, 0.4, 0.2, 0.0, 0.2, 0.5, 0.5, 0.6, 0.75, 0.4, 0.2, 0.0, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1];
+          room.daily_graph.updated_at = currentDate;
+          room.occupied = dp.value;
 
-        // if(req.body.value == 0) { //room currently not in use
-        //   if(room.occupied == 1) { //room was in use last datapoint
-        //     const time_elapsed = currentDate - room.last_open;
-        //     const new_avg = (time_elapsed + room.average_use_time*room.average_use_time_count)/(room.average_use_time_count+1);
-        //     room.average_use_time_count += 1;
-        //     room.average_use_time = new_avg;
-        //     room.occupied = 0;
-        //     room.last_open = currentDate;
-        //   }
-        // }
-        room.save((err) =>{
-          if(err){
-            console.log("Error updating new data");
-          }
-          res.status(200).end();
-        })
+          // if(req.body.value == 0) { //room currently not in use
+          //   if(room.occupied == 1) { //room was in use last datapoint
+          //     const time_elapsed = currentDate - room.last_open;
+          //     const new_avg = (time_elapsed + room.average_use_time*room.average_use_time_count)/(room.average_use_time_count+1);
+          //     room.average_use_time_count += 1;
+          //     room.average_use_time = new_avg;
+          //     room.occupied = 0;
+          //     room.last_open = currentDate;
+          //   }
+          // }
+          room.save((err) =>{
+            if(err){
+              console.log("Error updating new data");
+            }
+            res.status(200).end();
+          })
+        }
       } else {
         var currentDate = new Date();
 
