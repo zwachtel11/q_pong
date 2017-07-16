@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Panel, Col, Row, Button } from 'react-bootstrap';
 import { VictoryBar, VictoryChart, VictoryAxis } from 'victory';
-var moment = require('moment');
+
+import {BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend} from 'recharts';
 
 import {
   BrowserRouter as Router,
@@ -193,6 +194,13 @@ class DailyChart extends Component {
 	      }).catch(e => {
 	        throw e;
 	      });
+
+		// const data = [...Array(24).keys()].map(dp => .1);
+		// this.setState({
+		// 	data: data,
+		// 	updatedAt: moment()
+		// })
+
 	  }
 
 	render() {
@@ -208,7 +216,8 @@ class DailyChart extends Component {
 
 		const formattedData = this.state.data.map((dp, index) => {
 			return {
-				hour: index + 1,
+				// hour: index + 1,
+				hour: moment(this.state.updatedAt).subtract(24-index, 'hours').fromNow(),
 				value: dp
 			}
 		});
@@ -224,18 +233,26 @@ class DailyChart extends Component {
 
 		const timeTicks = formattedData
 			.map(dp => moment(this.state.updatedAt).subtract(dp.hour, 'hours').fromNow()).reverse()
-
-		// .filter((dp, index) => {
-		// 	return index % 6 == 0;
-		// });
+			.filter((dp, index) => {
+				return index % 6 == 0;
+			});
 
 		console.log(timeTicks);
 
+		return (
+			<div>
+				<BarChart width={500} height={400} data={formattedData}>
+					<Bar dataKey={'value'} />
+					<XAxis dataKey='hour' />
+					<YAxis />
+				</BarChart>
+			</div>
+		)
 
 		return (
 			<div>
 			    <VictoryChart
-			        domainPadding={20} >
+			        domainPadding={50} >
 			        <VictoryAxis
 			          fixLabelOverlap={true}
 			          tickValues={timeTicks}
