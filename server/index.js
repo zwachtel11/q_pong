@@ -89,7 +89,7 @@ app.post('/api/roomdata', (req, res) => {
       if (room.weekly_graph.data.length == 0 || room.daily_graph.data.length == 0) {
         console.log("no weekly or daily");
 
-        if (!room.weekly_graph) {
+        if (room.weekly_graph.data.length == 0) {
           console.log('no weekly');
           room.weekly_graph.data = [.1,.1,.1,.1,.1,.1,.1];
           room.weekly_graph.updated_at = dp.created_at;
@@ -102,7 +102,7 @@ app.post('/api/roomdata', (req, res) => {
           })
         }
 
-        if(!room.daily_graph) { 
+        if(room.daily_graph.data.length == 0) { 
           room.average_use_time =  0;
           room.average_use_time_count = 1; // one sample in the database
           room.last_open = dp.create_at;
