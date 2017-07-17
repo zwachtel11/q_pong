@@ -53,6 +53,9 @@ class MatchesList extends Component {
       }).catch(e => {
         throw e;
       });
+      this.setState({
+        matches = 
+      })
   }
 
   render() {
@@ -71,8 +74,8 @@ class MatchesList extends Component {
           <td>{moment(match.time).calendar()}</td>
           <td className={p1Winner ? "winner" : "loser"}>{match.p1_name}</td>
           <td className={p1Winner ? "winner" : "loser"}>{match.p1_score}</td>
-          <td className={p1Winner ? "winner" : "loser"}>{match.p2_score}</td>
-          <td className={p1Winner ? "winner" : "loser"}>{match.p2_name}</td>
+          <td className={p1Winner ? "loser" : "winner"}>{match.p2_score}</td>
+          <td className={p1Winner ? "loser" : "winner"}>{match.p2_name}</td>
         </tr>
         )
       }
