@@ -9,7 +9,9 @@ body {
 
 .winner {
   /*background: #06479a;*/
-  background:rgba(6, 71, 154,1);
+  /*background:rgba(6, 71, 154,1);*/
+  background: rgb(5,76,170);
+
   color:white;
   font-size:20px;
 }
@@ -22,6 +24,10 @@ body {
 
 .panel h1 {
 	font-size: 30px;
+}
+
+.chart-panel .panel-body {
+  padding-left:0px;
 }
 
 .jumbotron {
@@ -67,7 +73,8 @@ nav a .fork {
 }
 
 .panel .panel-heading {
-	background: #005cb3;
+	/*background: #06479a;*/
+  background: rgb(5,76,170);
 	color:white;
 }
 
@@ -94,7 +101,8 @@ nav a .fork {
 	margin: 0px;
     border: 0px;
     /*background: #005cb3;*/
-    background: rgb(6,71,154);
+    /*background: rgb(6,71,154);*/
+    background: rgb(5,76,170);
     border-radius: 0px;
     color: white;
 }

@@ -12,6 +12,7 @@ import {
 
 const moment = require('moment');
 const barColor = "#e04e41";
+// const barColor = "rgb(5,76,170)"
 
 export default class RoomPage extends Component {
 	constructor(props) {
@@ -65,7 +66,7 @@ class WeeklyPanel extends Component {
 		const roomName = this.props.roomName;
 		return (
 			<Col md={6}>
-				<Panel header={<h1>Weekly Use</h1>} style={{textAlign:"center"}}>
+				<Panel className="chart-panel" header={<h1>Weekly Use</h1>} style={{textAlign:"center"}} >
 					<WeeklyChart roomName={roomName} />
 				</Panel>
 			</Col>
@@ -102,11 +103,11 @@ class WeeklyChart extends Component {
 	      }).catch(e => {
 	        throw e;
 	      });
-	    const data = [...Array(7).keys()].map(dp => .5);
-		this.setState({
-			data: data,
-			updatedAt: moment()
-		})
+	 //    const data = [...Array(7).keys()].map(dp => .5);
+		// this.setState({
+		// 	data: data,
+		// 	updatedAt: moment()
+		// })
 	  }
 
 	render() {
@@ -124,16 +125,16 @@ class WeeklyChart extends Component {
 			return {
 				// hour: index + 1,
 				day: moment(this.state.updatedAt).subtract(6-index, 'days').format('ddd'),
-				value: dp
+				value: dp * 24
 			}
 		});
 
 		return (
 			<ResponsiveContainer width='100%' height="100%" aspect={4.0/2.0}>
-				<BarChart data={formattedData}>
+				<BarChart data={formattedData} margin={{top: 0, right: 0, bottom: 0, left: 0 }}>
 					<Bar dataKey={'value'} fill={barColor} />
 					<XAxis dataKey='day' />
-					<YAxis domain={[0,1]} />
+					<YAxis domain={[0,24]} />
 				</BarChart>
 			</ResponsiveContainer>
 		)
@@ -152,7 +153,7 @@ class DailyPanel extends Component {
 		const roomName = this.props.roomName;
 		return (
 			<Col md={6}>
-				<Panel header={<h1>Daily Use</h1>} style={{textAlign:"center"}}>
+				<Panel className='chart-panel' header={<h1>Daily Use</h1>} style={{textAlign:"center"}}>
 					<DailyChart roomName={roomName} />
 				</Panel>
 			</Col>
@@ -190,11 +191,11 @@ class DailyChart extends Component {
 	        throw e;
 	      });
 
-		const data = [...Array(24).keys()].map(dp => 10);
-		this.setState({
-			data: data,
-			updatedAt: moment()
-		})
+		// const data = [...Array(24).keys()].map(dp => 10);
+		// this.setState({
+		// 	data: data,
+		// 	updatedAt: moment()
+		// })
 
 	  }
 
@@ -207,13 +208,13 @@ class DailyChart extends Component {
 			return {
 				// hour: index + 1,
 				hour: moment(this.state.updatedAt).subtract(23-index, 'hours').format('h a'),
-				value: dp
+				value: dp * 60
 			}
 		});
 
 		return (
 			<ResponsiveContainer width='100%' height="100%" aspect={4.0/2.0}>
-				<BarChart data={formattedData}>
+				<BarChart data={formattedData} margin={{top: 0, right: 0, bottom: 0, left: 0 }}>
 					<Bar dataKey={'value'} fill={barColor} />
 					<XAxis dataKey='hour' />
 					<YAxis domain={[0,60]} />

@@ -20,7 +20,7 @@ export default class Home extends Component {
     return (
       <div>
         <Jumbotron>
-            <div style={{height:"500px"}}></div>
+            <div style={{height:"300px"}}></div>
             <h1 style={{textAlign: "center", color:"white"}}>Welcome to QPong</h1>
         </Jumbotron>
         <RoomList />
