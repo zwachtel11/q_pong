@@ -53,9 +53,6 @@ class MatchesList extends Component {
       }).catch(e => {
         throw e;
       });
-      this.setState({
-        matches = 
-      })
   }
 
   render() {
