@@ -42,15 +42,15 @@ export default class ReportMatchPage extends Component {
 	            }
 	    }).then(res => {
 	      return res.json();
-	      this.setState({
-	      	p1Name: null,
-			p1Email: null,
-			p1Score: null,
-			p2Name: null,
-			p2Email: null,
-			p2Score: null,
-	      })
 	    }).then(json => {
+		    this.setState({
+		      	p1Name: null,
+				p1Email: null,
+				p1Score: null,
+				p2Name: null,
+				p2Email: null,
+				p2Score: null,
+		      })
 	      console.log(json);
 	    })
 		}
