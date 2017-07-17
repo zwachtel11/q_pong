@@ -16,7 +16,7 @@ export default class MatchesPage extends Component {
   render() {
     return (
       <div className="container">
-      	<h1 style={{textAlign: "center"}}>Matches for room {this.props.match.params.roomName}</h1>
+      	<h1 style={{textAlign: "center"}}>Matches for room <Link to={`/rooms/${this.props.match.params.roomName}`}>{this.props.match.params.roomName}</Link></h1>
         <MatchesList roomName={this.props.match.params.roomName} />
       </div>
     )

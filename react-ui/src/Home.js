@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { ListGroup, ListGroupItem, Jumbotron, Row, Col } from 'react-bootstrap';
+import { ListGroup, ListGroupItem, Jumbotron, Row, Col, Panel } from 'react-bootstrap';
 
 import {
   BrowserRouter as Router,
@@ -62,16 +62,17 @@ class RoomList extends Component {
   render() {
     const mappedRooms = this.state.rooms
       ? this.state.rooms.map(room => {
-        return <ListGroupItem bsStyle={room.occupied ? "danger" : "success"}><Link to={`rooms/${room.roomName}`}>{room.roomName} - {room.occupied ? "Occupied" : "Open"}</Link></ListGroupItem>
+        return <ListGroupItem bsStyle={room.occupied ? "danger" : "success"}><Link to={`/rooms/${room.roomName}`}>{room.roomName} - {room.occupied ? "Occupied" : "Open"}</Link></ListGroupItem>
       })
-      : <ListGroupItem><Link to="asdf"></Link></ListGroupItem>
+      : <ListGroupItem><Link to="/"></Link></ListGroupItem>
 
     return (
-      <div className="container">
-        <h2>Rooms</h2>
-        <ListGroup>
-          {mappedRooms}
-        </ListGroup>
+      <div className="container" style={{paddingTop: "20px"}}>
+        <Panel header={<h1>Rooms</h1>}>
+          <ListGroup>
+            {mappedRooms}
+          </ListGroup>
+        </Panel>
       </div>
     )
   }

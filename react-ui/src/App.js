@@ -32,9 +32,9 @@ class Routerr extends Component {
         <div>
           <Naver />
           <Route exact path="/" component={Home} />
-          <Route path='/reportMatch' component={ReportMatchPage} />
+          <Route path='/rooms/:roomName/reportMatch' component={ReportMatchPage} />
           <Route exact path="/rooms/:roomName" component={RoomPage} />
-          <Route exact path='/matches/:roomName' component={MatchesPage} />
+          <Route exact path='/rooms/:roomName/matches' component={MatchesPage} />
           <Route path="/about" component={About} />
         </div>
       </Router>

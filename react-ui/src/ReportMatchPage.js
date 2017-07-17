@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { Panel, Col, Row, Button, FormGroup, ControlLabel, FormControl, FormControlsSelect, FieldGroup, InputGroup } from 'react-bootstrap';
-
+import {
+  BrowserRouter as Router,
+  Route,
+  Link
+} from 'react-router-dom';
 
 export default class ReportMatchPage extends Component {
 	constructor(props) {
@@ -12,28 +16,9 @@ export default class ReportMatchPage extends Component {
 			p2Name: null,
 			p2Email: null,
 			p2Score: null,
-			roomName: null
+			roomName: props.match.params.roomName
 		}
 	}
-
-	componentDidMount() {
-	    fetch('/api/rooms')
-	      .then(response => {
-	        if (!response.ok) {
-	          console.log('response')
-	          console.log(response.status)
-	          throw new Error(`status ${response.status}`);
-	        }
-	        return response.json();
-	      }).then(json => {
-	        console.log(json);
-	        this.setState({
-	          rooms: json
-	        })
-	      }).catch(e => {
-	        throw e;
-	      });
-	  }
 
 	handleSubmit = (event) => {
 		event.preventDefault();
@@ -57,6 +42,14 @@ export default class ReportMatchPage extends Component {
 	            }
 	    }).then(res => {
 	      return res.json();
+	      this.setState({
+	      	p1Name: null,
+			p1Email: null,
+			p1Score: null,
+			p2Name: null,
+			p2Email: null,
+			p2Score: null,
+	      })
 	    }).then(json => {
 	      console.log(json);
 	    })
@@ -79,18 +72,7 @@ export default class ReportMatchPage extends Component {
 	render() {
 		return (
 			<div className="container" style={{paddingTop: "20px"}}>
-				<h1 style={{textAlign:"center"}}>Report Match</h1>
-				<Row>
-					<Col md={2}></Col>
-					<Col md={8}>
-						<FormGroup>
-							<FormControl type="text" placeholder="Room Name" name="roomName" value={this.state.roomName} onChange={this.onValueChanged} />
-						</FormGroup>
-					</Col>
-					<Col md={2}></Col>
-
-				</Row>
-
+				<h1 style={{textAlign:"center"}}>Report Match in room <Link to={`/rooms/${this.props.match.params.roomName}`}>{this.props.match.params.roomName}</Link></h1>
 				<Row>
 					<Col md={4}>
 						<h4 style={{textAlign:"center"}}>Player 1</h4>

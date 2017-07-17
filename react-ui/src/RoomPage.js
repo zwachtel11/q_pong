@@ -45,8 +45,8 @@ class ButtonGroup extends Component {
 		return (
 			<Col md={4}>
 				<Panel header={<h1>Buttons</h1>}>
-					<Link to="/reportmatch"><Button block bsSize="large">Report Match</Button></Link>
-					<Link to={`/matches/${this.props.roomName}`}><Button block bsSize="large">View Match History</Button></Link>
+					<Link to={`/rooms/${this.props.roomName}/reportmatch`}><Button block bsSize="large">Report Match</Button></Link>
+					<Link to={`/rooms/${this.props.roomName}/matches`}><Button block bsSize="large">View Match History</Button></Link>
 				</Panel>
 			</Col>
 		)

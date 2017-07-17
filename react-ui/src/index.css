@@ -8,11 +8,16 @@ body {
 }
 
 .winner {
-  background: #06479a;
+  /*background: #06479a;*/
+  background:rgba(6, 71, 154,1);
+  color:white;
+  font-size:20px;
 }
 
 .loser {
   background:#e04e41;
+  color:white;
+  font-size:20px;
 }
 
 .panel h1 {
