@@ -7,6 +7,14 @@ body {
   /*font-family: 'Montserrat Alternates', sans-serif;*/
 }
 
+.winner {
+  background: #06479a;
+}
+
+.loser {
+  background:#e04e41;
+}
+
 .panel h1 {
 	font-size: 30px;
 }
@@ -15,6 +23,8 @@ body {
   padding-top:0px;
   margin-bottom:0px;
   padding-bottom:15px;
+  background: url('../public/pingPong.jpg') no-repeat center center;
+  background-size: cover;
 }
 
 .nav {
@@ -31,7 +41,7 @@ body {
 }
 
 .nav h3:hover {
-  color:orange;
+  color:#e04e41;
 }
 
 .navbar {
@@ -78,7 +88,8 @@ nav a .fork {
 .navbar {
 	margin: 0px;
     border: 0px;
-    background: #005cb3;
+    /*background: #005cb3;*/
+    background: rgb(6,71,154);
     border-radius: 0px;
     color: white;
 }

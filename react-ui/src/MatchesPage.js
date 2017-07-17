@@ -9,6 +9,7 @@ import {
 } from 'react-router-dom';
 
 const moment = require('moment');
+import './index.css';
 
 
 export default class MatchesPage extends Component {
@@ -63,14 +64,18 @@ class MatchesList extends Component {
 
   	console.log(sortedMatches)
 
-    const mappedMatchRows = sortedMatches.map(match => 
-      <tr>
-        <td>{match.time}</td>
-        <td>{match.p1_name}</td>
-        <td>{match.p1_score}</td>
-        <td>{match.p2_score}</td>
-        <td>{match.p2_name}</td>
-      </tr>
+    const mappedMatchRows = sortedMatches.map(match => {
+      const p1Winner = match.p1_score > match.p2_score;
+      return (
+        <tr>
+          <td>{moment(match.time).calendar()}</td>
+          <td class={p1Winner ? "winner" : "loser"}>{match.p1_name}</td>
+          <td class={p1Winner ? "winner" : "loser"}>{match.p1_score}</td>
+          <td class={p1Winner ? "winner" : "loser"}>{match.p2_score}</td>
+          <td class={p1Winner ? "winner" : "loser"}>{match.p2_name}</td>
+        </tr>
+        )
+      }
     )
 
     return (

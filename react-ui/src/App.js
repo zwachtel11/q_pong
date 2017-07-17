@@ -15,7 +15,7 @@ import RoomPage from './RoomPage.js';
 import ReportMatchPage from './ReportMatchPage';
 import MatchesPage from './MatchesPage';
 import {Navbar, Nav, NavItem} from 'react-bootstrap';
-import qpong from './qpong.png';
+import qpong from './qpong3.png';
 
 
 const About = () => (

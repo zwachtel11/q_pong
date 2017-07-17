@@ -11,6 +11,7 @@ import {
 } from 'react-router-dom';
 
 const moment = require('moment');
+const barColor = "#e04e41";
 
 export default class RoomPage extends Component {
 	constructor(props) {
@@ -130,7 +131,7 @@ class WeeklyChart extends Component {
 		return (
 			<ResponsiveContainer width='100%' height="100%" aspect={4.0/2.0}>
 				<BarChart data={formattedData}>
-					<Bar dataKey={'value'} fill="#ff9900" />
+					<Bar dataKey={'value'} fill={barColor} />
 					<XAxis dataKey='day' />
 					<YAxis domain={[0,1]} />
 				</BarChart>
@@ -213,7 +214,7 @@ class DailyChart extends Component {
 		return (
 			<ResponsiveContainer width='100%' height="100%" aspect={4.0/2.0}>
 				<BarChart data={formattedData}>
-					<Bar dataKey={'value'} fill="#ff9900" />
+					<Bar dataKey={'value'} fill={barColor} />
 					<XAxis dataKey='hour' />
 					<YAxis domain={[0,60]} />
 				</BarChart>
