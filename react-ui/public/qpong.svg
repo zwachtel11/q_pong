@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<svg viewBox="26 40 130 140" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="26 40 291 140" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <pattern id="pattern-0" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse" viewBox="0 0 100 100">
       <path d="M 0 0 L 50 0 L 50 100 L 0 100 Z" style="fill: black;"/>
     </pattern>
-    <style id="bx-google-fonts">@import url(https://fonts.googleapis.com/css?family=Arimo:400,400italic,700,700italic);</style>
+    <style id="bx-google-fonts">@import url(https://fonts.googleapis.com/css?family=Aldrich:400|Arimo:400,400italic,700,700italic);</style>
   </defs>
   <text x="216.427" y="189.124" style="fill: rgb(7, 94, 187); font-family: Arimo; font-size: 32px; white-space: pre;"> </text>
   <path d="M 67.654 138.205 L 56.386 126.575 L 51.214 110.083 L 52.138 96.76 L 56.571 84.92 L 64.699 75.406 L 75.228 68.85 L 86.497 67.793 L 99.613 72.021 L 109.772 81.113 L 116.609 94.857 L 117.901 111.562 L 114.576 124.46 L 108.109 134.188 L 101.461 139.685 L 91.3 144.337 L 89.388 141.587 L 94.424 132.514 L 78.353 127.862 L 67.654 138.205 Z" style="stroke: rgb(255, 0, 0); fill: rgb(0, 92, 179);"/>
@@ -12,4 +12,5 @@
   <ellipse cx="79.065" cy="56.652" rx="7.004" ry="7.109" style="stroke-width: 5; fill: rgb(255, 151, 0); stroke: rgb(255, 151, 0);"/>
   <path d="M 74.303 52.584 C 72.56 50.699 78.851 44.862 80.007 46.082 C 79.336 45.514 73.893 49.654 74.303 52.584 Z" style="fill: rgb(255, 255, 255); stroke: rgb(255, 255, 255); stroke-width: 0;" transform="matrix(0.869628, 0.493708, -0.493708, 0.869628, 34.000174, -31.30964)"/>
   <ellipse cx="79.065" cy="56.652" rx="7.004" ry="7.109" style="stroke: rgb(0, 0, 0); fill: rgba(0, 0, 0, 0.509804); stroke-width: 0;" transform="matrix(1, 0, 0, 1.000001, 4.722122, 34.118683)"/>
+  <text x="145.816" y="95.345" transform="matrix(1.443883, 0, 0, 2.119378, -80.850609, -56.021446)" style="fill: rgb(255, 255, 255); font-family: Aldrich; font-size: 45.4379px; font-style: italic; white-space: pre;">Pong</text>
 </svg>

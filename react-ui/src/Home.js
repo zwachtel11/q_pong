@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { ListGroup, ListGroupItem, Jumbotron } from 'react-bootstrap';
+import { ListGroup, ListGroupItem, Jumbotron, Row, Col } from 'react-bootstrap';
 
 import {
   BrowserRouter as Router,
@@ -8,17 +8,17 @@ import {
   Link
 } from 'react-router-dom';
 
-import logo2 from './logo2.png';
+import logo3 from './logo3.png';
 
 export default class Home extends Component {
+  // <a href="https://github.com/you"><img style={{position: "absolute", top: 0, right: 0, border: 0, width: "149px", height: "149px"}} src="http://aral.github.com/fork-me-on-github-retina-ribbons/right-orange@2x.png" alt="Fork me on GitHub" /></a>
+
   render() {
     return (
       <div>
         <Jumbotron style={{background:"#005cb3"}}>
-          <div style={{textAlign:"center"}}><img src={logo2} width={300} height={300} style={{textAlign:"center"}} /></div>
-          <h1 style={{textAlign: "center", color:"white"}}>Welcome to QPong</h1>
-          <h3 style={{textAlign: "center", color:"white"}}>Built with Room CheQ</h3>
-
+            <div style={{textAlign:"center"}}><img src={logo3} width={400} height={430} style={{textAlign:"center"}} /></div>
+            <h1 style={{textAlign: "center", color:"white"}}>Welcome to QPong</h1>
         </Jumbotron>
         <RoomList />
       </div>
@@ -65,6 +65,7 @@ class RoomList extends Component {
 
     return (
       <div className="container">
+        <h2>Rooms</h2>
         <ListGroup>
           {mappedRooms}
         </ListGroup>

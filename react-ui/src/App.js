@@ -15,12 +15,13 @@ import RoomPage from './RoomPage.js';
 import ReportMatchPage from './ReportMatchPage';
 import MatchesPage from './MatchesPage';
 import {Navbar, Nav, NavItem} from 'react-bootstrap';
-
+import qpong from './qpong.png';
 
 
 const About = () => (
-  <div>
-    <h2>About</h2>
+  <div className="container">
+    <h1>About</h1>
+    <p>Created by Sam Ford, Tony Oliverio, Zach Wachtel, and hardware guy at the 2017 Qualcomm Hack Mobile</p>
   </div>
 )
 
@@ -47,12 +48,12 @@ class Naver extends Component {
       <Navbar>
         <Navbar.Header>
           <Navbar.Brand>
-            <Link to="/"><span>Home</span></Link>
+            <Link to="/"><span style={{fontSize: "40px"}}><img src={qpong} height={70} width={146} /></span></Link>
           </Navbar.Brand>
         </Navbar.Header>
-        <Nav>
-          <NavItem><Link to="/"><span>Report Match</span></Link></NavItem>
-          <NavItem style={{float: "right"}}><Link to="/"><span>About</span></Link></NavItem>
+        <Nav >
+          <NavItem><Link to="/about"><h3>About</h3></Link></NavItem>
+          <NavItem><Link to="/about"><h3>Github</h3></Link></NavItem>
         </Nav>
       </Navbar>
     )

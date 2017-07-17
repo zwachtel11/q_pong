@@ -11,6 +11,46 @@ body {
 	font-size: 30px;
 }
 
+.jumbotron {
+  padding-top:0px;
+  margin-bottom:0px;
+  padding-bottom:15px;
+}
+
+.nav {
+  float:right;
+}
+
+.nav h3 {
+  color:white;
+}
+
+.navbar li a {
+  padding-top:0px;
+  padding-bottom:0px;
+}
+
+.nav h3:hover {
+  color:orange;
+}
+
+.navbar {
+  padding-bottom:15px;
+}
+
+.navbar-brand {
+  padding-top:0px;
+}
+
+nav a .fork {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: 0;
+  width: 149px;
+  height: 149px;
+}
+
 .panel .panel-heading {
 	background: #005cb3;
 	color:white;

@@ -23,7 +23,7 @@ export default class RoomPage extends Component {
 	render() {
 		const roomName = this.props.match.params.roomName;
 		return (
-			<div className="container-fluid" style={{paddingTop: "20px"}}>
+			<div className="container" style={{paddingTop: "20px"}}>
 				<Row className='row-group'>
 					<StatusPanel roomName={roomName} />
 					<ButtonGroup roomName={roomName} />
@@ -36,6 +36,8 @@ export default class RoomPage extends Component {
 		)
 	}
 }
+
+
 
 class ButtonGroup extends Component {
 	render() {
