@@ -141,7 +141,7 @@ app.post('/api/roomdata', (req, res) => {
 
           const newWeek = room.weekly_graph.data.slice(1);
           newWeek.push(dailyAverage);
-          room.weekly_graph = newWeek;
+          room.weekly_graph.data = newWeek;
           room.weekly_graph.updated_at = currentDate;
         }
 

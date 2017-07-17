@@ -272,7 +272,7 @@ class StatusPanel extends Component {
 					<Col md={4}>
 						<div style={{textAlign: "center"}}>
 						<svg>
-							<circle cx={75} cy={75} r={75} fill={this.state.occupied ? "red" : "green"} />
+							<circle cx={75} cy={75} r={75} fill={this.state.occupied ? "#e04e41" : "green"} />
 						</svg>
 						</div>
 					</Col>
