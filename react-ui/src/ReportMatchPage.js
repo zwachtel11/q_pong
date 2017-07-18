@@ -11,10 +11,8 @@ export default class ReportMatchPage extends Component {
 		super(props)
 		this.state = {
 			p1Name: null,
-			p1Email: null,
 			p1Score: null,
 			p2Name: null,
-			p2Email: null,
 			p2Score: null,
 			roomName: props.match.params.roomName
 		}
@@ -23,15 +21,13 @@ export default class ReportMatchPage extends Component {
 	handleSubmit = (event) => {
 		event.preventDefault();
 		console.log("asdf");
-		// if (this.state.p1_name == null || this.state.p2_name == null || this.state.p1_score == null || this.state.p2_score == null) {
-		// 	return;
-		// }
+		if (this.state.p1Name == null || this.state.p2Name == null || this.state.p1Score == null || this.state.p2Score == null) {
+			return;
+		}
 		const match = {
 			p1_name: this.state.p1Name,
-			p1_email: this.state.p1Email,
 			p1_score: this.state.p1Score,
 			p2_name: this.state.p2Name,
-			p2_email: this.state.p2Email,
 			p2_score: this.state.p2Score,
 			room_name: this.state.roomName
 		}
@@ -47,10 +43,8 @@ export default class ReportMatchPage extends Component {
 	    }).then(json => {
 		    this.setState({
 		      	p1Name: null,
-				p1Email: null,
 				p1Score: null,
 				p2Name: null,
-				p2Email: null,
 				p2Score: null,
 		      })
 	      console.log(json);

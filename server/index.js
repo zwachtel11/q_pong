@@ -20,10 +20,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 
   const matchSchema = new Schema({
     p1_name:String,
-    p1_email:String,
     p1_score:Number,
     p2_name:String,
-    p2_email:String,
     p2_score:Number,
     room_name:String,
     time: Date
@@ -134,13 +132,15 @@ app.post('/api/roomdata', (req, res) => {
         var currentDate = new Date();
 
 
-        var time_elapsed_ms = (currentDate - room.last_open);
-        const time_elapsed_min = Math.round(((time_elapsed_ms % 86400000) % 3600000) / 60000);
-        console.log("time_elapsed_min");
-        console.log(time_elapsed_min);
-        var new_avg = (time_elapsed_min + room.average_use_time*room.average_use_time_count)/(room.average_use_time_count+1);
-        console.log('new_avg');
-        console.log(new_avg);
+        // var time_elapsed_ms = (currentDate - room.last_open);
+        // console.log("time_elaspsed_ms")
+        // console.log(time_elaspsed_ms)
+        // const time_elapsed_min = Math.round(((time_elapsed_ms % 86400000) % 3600000) / 60000);
+        // console.log("time_elapsed_min");
+        // console.log(time_elapsed_min);
+        // var new_avg = (time_elapsed_min + room.average_use_time*room.average_use_time_count)/(room.average_use_time_count+1);
+        // console.log('new_avg');
+        // console.log(new_avg);
 
 
         //if the weekly graph hasnt't been updated in 1 day
