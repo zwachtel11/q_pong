@@ -21,7 +21,8 @@ import qpong from './qpong3.png';
 const About = () => (
   <div className="container">
     <h1>About</h1>
-    <p>Created by Sam Ford, Tony Oliverio, Zach Wachtel, and hardware guy at the 2017 Qualcomm Hack Mobile</p>
+    <p>Created by Sam Ford, Tony Oliverio, Zach Wachtel, and Brian Worek at the 2017 Qualcomm Hack Mobile Hackathon.</p>
+    <p>We will be presenting this application in the N Lecture Hall on July 27th. Come check it out and vote for QPong if you've found this useful!</p>
   </div>
 )
 

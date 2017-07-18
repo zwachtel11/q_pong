@@ -46,8 +46,8 @@ class ButtonGroup extends Component {
 		return (
 			<Col md={4}>
 				<Panel header={<h1>Matches</h1>}>
-					<Link to={`/rooms/${this.props.roomName}/reportmatch`}><Button block bsSize="large">Report Match</Button></Link>
-					<Link to={`/rooms/${this.props.roomName}/matches`}><Button block bsSize="large">View Match History</Button></Link>
+					<Link className="btn btn-lg" style={{display:"block"}} to={`/rooms/${this.props.roomName}/reportmatch`}>Report Match</Link>
+					<Link className="btn btn-lg" style={{display:"block"}} to={`/rooms/${this.props.roomName}/matches`}>View Match History</Link>
 				</Panel>
 			</Col>
 		)
@@ -66,7 +66,7 @@ class WeeklyPanel extends Component {
 		const roomName = this.props.roomName;
 		return (
 			<Col md={6}>
-				<Panel className="chart-panel" header={<h1>Weekly Use</h1>} style={{textAlign:"center"}} >
+				<Panel className="chart-panel" header={<h1>Weekly Use Histogram</h1>} style={{textAlign:"center"}} >
 					<WeeklyChart roomName={roomName} />
 				</Panel>
 			</Col>
@@ -153,7 +153,7 @@ class DailyPanel extends Component {
 		const roomName = this.props.roomName;
 		return (
 			<Col md={6}>
-				<Panel className='chart-panel' header={<h1>Daily Use</h1>} style={{textAlign:"center"}}>
+				<Panel className='chart-panel' header={<h1>Daily Use Histogram</h1>} style={{textAlign:"center"}}>
 					<DailyChart roomName={roomName} />
 				</Panel>
 			</Col>
@@ -230,6 +230,7 @@ class StatusPanel extends Component {
 		super(props)
 		this.state = {
 			occupied: null,
+			fillColor: 'gray',
 			lastOpen: null,
 			averageUseTime:null
 		}
@@ -251,7 +252,8 @@ class StatusPanel extends Component {
 	        this.setState({
 	        	occupied: json.occupied,
 	        	lastOpen: json.lastOpen,
-	        	averageUseTime: json.averageUseTime
+	        	averageUseTime: json.averageUseTime,
+	        	fillColor: json.occupied ? "#e04e41" : "green"
 	        });
 	      }).catch(e => {
 	        throw e;
@@ -266,13 +268,15 @@ class StatusPanel extends Component {
 		// 	return <div></div>;
 		// }
 
+		
+
 		return (
 			<Col md={8}>
 				<Panel header={<h1>{roomName}</h1>} style={{textAlign:"center"}}>
 					<Col md={4}>
 						<div style={{textAlign: "center"}}>
 						<svg>
-							<circle cx={75} cy={75} r={75} fill={this.state.occupied ? "#e04e41" : "green"} />
+							<circle cx={75} cy={75} r={75} fill={this.state.fillColor} />
 						</svg>
 						</div>
 					</Col>

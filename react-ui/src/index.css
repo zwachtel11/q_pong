@@ -16,6 +16,27 @@ body {
   font-size:20px;
 }
 
+.btn {
+  border-radius: 2px;
+  border: none;
+  /*box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);*/
+  transition: box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  /*transition-delay: 0.2s;*/
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+  background: #e04e41;
+  color: white;
+  margin-bottom: 20px;
+}
+
+.btn:hover {
+  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.5);
+  transition-delay: 0s;
+  color:white;
+}
+
+
+
+
 .loser {
   background:#e04e41;
   color:white;
