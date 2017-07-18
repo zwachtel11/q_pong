@@ -133,6 +133,16 @@ app.post('/api/roomdata', (req, res) => {
         console.log('else');
         var currentDate = new Date();
 
+
+        var time_elapsed_ms = (currentDate - room.last_open);
+        const time_elapsed_min = Math.round(((time_elapsed_ms % 86400000) % 3600000) / 60000);
+        console.log("time_elapsed_min");
+        console.log(time_elapsed_min);
+        var new_avg = (time_elapsed_min + room.average_use_time*room.average_use_time_count)/(room.average_use_time_count+1);
+        console.log('new_avg');
+        console.log(new_avg);
+
+
         //if the weekly graph hasnt't been updated in 1 day
         if(((currentDate.getTime() - room.weekly_graph.updated_at.getTime())/1000.0) > 3600*24) {
           //condense daily graph to a single point average
@@ -183,8 +193,12 @@ app.post('/api/roomdata', (req, res) => {
           if(dp.value == 0) { // if room is currently empty
             if(room.occupied == 1) { // if room was just occupied
               // now we need to update time elapsed
-              var time_elapsed = currentDate - room.last_open;
-              var new_avg = (time_elapsed + room.average_use_time*room.average_use_time_count)/(room.average_use_time_count+1);
+              var time_elapsed_ms = (currentDate - room.last_open);
+              const time_elapsed_min = Math.round(((time_elapsed_ms % 86400000) % 3600000) / 60000);
+              console.log(time_elapsed_min);
+              var new_avg = (time_elapsed_min + room.average_use_time*room.average_use_time_count)/(room.average_use_time_count+1);
+              console.log('new_avg');
+              console.log(new_avg);
               room.average_use_time_count += 1; //count the number of samples in the average
               room.average_use_time = new_avg;
             }
