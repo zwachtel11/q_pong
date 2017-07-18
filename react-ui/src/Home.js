@@ -72,7 +72,7 @@ class RoomList extends Component {
   render() {
     const mappedRooms = this.state.rooms
       ? this.state.rooms.map(room => {
-        return <ListGroupItem style={room.occupied ? {background: '#e04e41'} : {}}><h4><Link style={{color:"white"}} to={`/rooms/${room.roomName}`}>{room.roomName} - {room.occupied ? "Occupied" : "Open"}</Link></h4></ListGroupItem>
+        return <ListGroupItem style={room.occupied ? {background: '#e04e41'} : {}}><h4><Link style={room.occupied ? {color: 'white'} : {}} to={`/rooms/${room.roomName}`}>{room.roomName} - {room.occupied ? "Occupied" : "Open"}</Link></h4></ListGroupItem>
       })
       : <ListGroupItem><Link to="/"></Link></ListGroupItem>
 
