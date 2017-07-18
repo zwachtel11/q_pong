@@ -58,13 +58,13 @@ class RoomList extends Component {
         throw e;
       });
 
-      this.setState({
-        rooms: [
-          {name: 'test1', occupied: true},
-          {name: 'test2', occupied: true},
-          {name: 'test3', occupied: true},
-        ]
-      })
+      // this.setState({
+      //   rooms: [
+      //     {name: 'test1', occupied: true},
+      //     {name: 'test2', occupied: true},
+      //     {name: 'test3', occupied: true},
+      //   ]
+      // })
   }
 
   // bsStyle={room.occupied ? "danger" : "success"}
