@@ -71,8 +71,8 @@ class MatchesList extends Component {
         <tr>
           <td>{moment(match.time).calendar()}</td>
           <td className={p1Winner ? "winner" : "loser"}>{match.p1_name}</td>
-          <td className={p1Winner ? "winner" : "loser"}>{match.p1_score}</td>
-          <td className={p1Winner ? "loser" : "winner"}>{match.p2_score}</td>
+          <td className={p1Winner ? "winner" : "loser"}>{p1Winner ? " &#10004;" : ""}{match.p1_score}</td>
+          <td className={p1Winner ? "loser" : "winner"}>{match.p2_score}{p1Winner ? "" : " &#10004;"}</td>
           <td className={p1Winner ? "loser" : "winner"}>{match.p2_name}</td>
         </tr>
         )
@@ -84,6 +84,7 @@ class MatchesList extends Component {
         <thead>
           <tr>
             <th>Time</th>
+            <th><th>
             <th>Player 1</th>
             <th>P1 Score</th>
             <th>P2 Score</th>

@@ -11,8 +11,14 @@ body {
   /*background: #06479a;*/
   /*background:rgba(6, 71, 154,1);*/
   /*background: rgb(5,76,170);*/
-  background: #4E937A;
-  color:white;
+  /*background: #4E937A;*/
+  /*color:white;*/
+  font-size:20px;
+}
+
+.loser {
+  /*background:#e04e41;*/
+  /*color:white;*/
   font-size:20px;
 }
 
@@ -38,11 +44,7 @@ body {
 
 
 
-.loser {
-  background:#e04e41;
-  color:white;
-  font-size:20px;
-}
+
 
 .panel h1 {
 	font-size: 30px;
