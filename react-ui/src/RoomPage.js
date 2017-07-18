@@ -248,11 +248,12 @@ class StatusPanel extends Component {
 	        }
 	        return response.json();
 	      }).then(json => {
+	      	console.log('/api/rooms/:roomname data')
 	        console.log(json);
 	        this.setState({
 	        	occupied: json.occupied,
-	        	lastOpen: json.last_open,
-	        	averageUseTime: json.average_use_time,
+	        	lastOpen: json.lastOpen,
+	        	averageUseTime: json.averageUseTime,
 	        	fillColor: json.occupied ? "#e04e41" : "#4E937A"
 	        });
 	      }).catch(e => {
