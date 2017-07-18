@@ -253,7 +253,7 @@ class StatusPanel extends Component {
 	        	occupied: json.occupied,
 	        	lastOpen: json.lastOpen,
 	        	averageUseTime: json.averageUseTime,
-	        	fillColor: json.occupied ? "#e04e41" : "green"
+	        	fillColor: json.occupied ? "#e04e41" : "#4E937A"
 	        });
 	      }).catch(e => {
 	        throw e;
