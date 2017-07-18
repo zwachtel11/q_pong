@@ -23,7 +23,9 @@ export default class ReportMatchPage extends Component {
 	handleSubmit = (event) => {
 		event.preventDefault();
 		console.log("asdf");
-
+		if (this.state.p1_name == null || this.state.p2_name == null || this.state.p1_score == null || this.state.p2_score == null) {
+			return;
+		}
 		const match = {
 			p1_name: this.state.p1Name,
 			p1_email: this.state.p1Email,
@@ -53,7 +55,7 @@ export default class ReportMatchPage extends Component {
 		      })
 	      console.log(json);
 	    })
-		}
+	}
 
 	onValueChanged = (event) => {
 		console.log(event.target.name)
@@ -71,67 +73,32 @@ export default class ReportMatchPage extends Component {
 
 	render() {
 		return (
-			<div className="container" style={{paddingTop: "20px"}}>
-				<h1 style={{textAlign:"center"}}>Report Match in room <Link to={`/rooms/${this.props.match.params.roomName}`}>{this.props.match.params.roomName}</Link></h1>
-				<Row>
-					<Col md={4}>
-						<h4 style={{textAlign:"center"}}>Player 1</h4>
-
-					</Col>
-					<Col md={4}>
-					</Col>
-					<Col md={4}>
-						<h4 style={{textAlign:"center"}}>Player 2</h4>
-
-					</Col>
-				</Row>
+			<div className="container" style={{paddingTop: "20px", textAlign:"center"}}>
+			<Panel header={<h1 style={{textAlign:"center"}}>Report Match in room <Link style={{color:"#e04e41"}} to={`/rooms/${this.props.match.params.roomName}`}>{this.props.match.params.roomName}</Link></h1>} >
 				<Row>
 					<Col md={4}>
 						<FormGroup>
-							<FormControl type="text" placeholder="Name" name="p1Name" value={this.state.p1Name} onChange={this.onValueChanged} />
-						</FormGroup>
-					</Col>
-					<Col md={4}>
-					</Col>
-					<Col md={4}>
-						<FormGroup>
-							<FormControl type="text" placeholder="Name" name="p2Name" value={this.state.p2Name} onChange={this.onValueChanged} />
-						</FormGroup>
-					</Col>
-				</Row>
-
-				<Row>
-				<Col md={4}>
-					</Col>
-					<Col md={2}>
-						<FormGroup>
-							<FormControl type="text" placeholder="Score" name="p1Score" value={this.state.p1Score} onChange={this.onValueChanged} />
+							<FormControl type="text" placeholder="P1 Name" name="p1Name" value={this.state.p1Name} onChange={this.onValueChanged} />
 						</FormGroup>
 					</Col>
 					<Col md={2}>
 						<FormGroup>
-							<FormControl type="text" placeholder="Score" name="p2Score" value={this.state.p2Score} onChange={this.onValueChanged} />
+							<FormControl type="number" placeholder="P1 Score" name="p1Score" value={this.state.p1Score} onChange={this.onValueChanged} />
+						</FormGroup>
+					</Col>
+					<Col md={2}>
+						<FormGroup>
+							<FormControl type="number" placeholder="P2 Score" name="p2Score" value={this.state.p2Score} onChange={this.onValueChanged} />
 						</FormGroup>
 					</Col>
 					<Col md={4}>
-					</Col>
-				</Row>
-
-				<Row>
-					<Col md={4}>
 						<FormGroup>
-							<FormControl type="text" placeholder="Email" name="p1Email" value={this.state.p1Email} onChange={this.onValueChanged} />
-						</FormGroup>
-					</Col>
-					<Col md={4}>
-					</Col>
-					<Col md={4}>
-						<FormGroup>
-							<FormControl type="text" placeholder="Email" name="p2Email" value={this.state.p2Email} onChange={this.onValueChanged} />
+							<FormControl type="text" placeholder="P2 Name" name="p2Name" value={this.state.p2Name} onChange={this.onValueChanged} />
 						</FormGroup>
 					</Col>
 				</Row>
 				<Button onClick={this.handleSubmit}>Submit</Button>
+				</Panel>
 			</div>
 		)
 	}
