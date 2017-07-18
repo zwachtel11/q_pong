@@ -57,18 +57,28 @@ class RoomList extends Component {
       }).catch(e => {
         throw e;
       });
+
+      this.setState({
+        rooms: [
+          {name: 'test1', occupied: true},
+          {name: 'test2', occupied: true},
+          {name: 'test3', occupied: true},
+        ]
+      })
   }
+
+  // bsStyle={room.occupied ? "danger" : "success"}
 
   render() {
     const mappedRooms = this.state.rooms
       ? this.state.rooms.map(room => {
-        return <ListGroupItem bsStyle={room.occupied ? "danger" : "success"}><h4><Link to={`/rooms/${room.roomName}`}>{room.roomName} - {room.occupied ? "Occupied" : "Open"}</Link></h4></ListGroupItem>
+        return <ListGroupItem style={room.occupied ? {background: '#e04e41'} : {}}><h4><Link style={{color:"white"}} to={`/rooms/${room.roomName}`}>{room.roomName} - {room.occupied ? "Occupied" : "Open"}</Link></h4></ListGroupItem>
       })
       : <ListGroupItem><Link to="/"></Link></ListGroupItem>
 
     return (
       <div className="container" style={{paddingTop: "20px"}}>
-        <Panel header={<h1>Rooms</h1>}>
+        <Panel className="list-panel" header={<h1>Rooms</h1>}>
           <ListGroup>
             {mappedRooms}
           </ListGroup>

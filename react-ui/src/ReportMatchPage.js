@@ -39,14 +39,14 @@ export default class ReportMatchPage extends Component {
 	                "Content-Type": "application/json"
 	            }
 	    }).then(res => {
+	      this.setState({
+	      	p1Name: null,
+			p1Score: null,
+			p2Name: null,
+			p2Score: null,
+	      })
 	      return res.json();
 	    }).then(json => {
-		    this.setState({
-		      	p1Name: null,
-				p1Score: null,
-				p2Name: null,
-				p2Score: null,
-		      })
 	      console.log(json);
 	    })
 	}
