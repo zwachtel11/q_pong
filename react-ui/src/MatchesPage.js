@@ -84,7 +84,6 @@ class MatchesList extends Component {
         <thead>
           <tr>
             <th>Time</th>
-            <th><th>
             <th>Player 1</th>
             <th>P1 Score</th>
             <th>P2 Score</th>
