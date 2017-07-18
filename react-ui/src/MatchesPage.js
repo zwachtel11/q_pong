@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { ListGroup, ListGroupItem, Jumbotron, Table } from 'react-bootstrap';
+import { ListGroup, ListGroupItem, Jumbotron, Table, Panel } from 'react-bootstrap';
 
 import {
   BrowserRouter as Router,
@@ -15,9 +15,10 @@ import './index.css';
 export default class MatchesPage extends Component {
   render() {
     return (
-      <div className="container">
-      	<h1 style={{textAlign: "center"}}>Matches for room <Link to={`/rooms/${this.props.match.params.roomName}`}>{this.props.match.params.roomName}</Link></h1>
-        <MatchesList roomName={this.props.match.params.roomName} />
+      <div className="container" style={{paddingTop: "20px"}}>
+        <Panel header={<h1 style={{textAlign: "center"}}>Matches for room <Link to={`/rooms/${this.props.match.params.roomName}`}>{this.props.match.params.roomName}</Link></h1>}>
+          <MatchesList roomName={this.props.match.params.roomName} />
+        </Panel>
       </div>
     )
   }

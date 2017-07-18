@@ -23,9 +23,9 @@ export default class ReportMatchPage extends Component {
 	handleSubmit = (event) => {
 		event.preventDefault();
 		console.log("asdf");
-		if (this.state.p1_name == null || this.state.p2_name == null || this.state.p1_score == null || this.state.p2_score == null) {
-			return;
-		}
+		// if (this.state.p1_name == null || this.state.p2_name == null || this.state.p1_score == null || this.state.p2_score == null) {
+		// 	return;
+		// }
 		const match = {
 			p1_name: this.state.p1Name,
 			p1_email: this.state.p1Email,
