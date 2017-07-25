@@ -262,10 +262,6 @@ class StatusPanel extends Component {
 	      });
 	}
 
-	poll = () => {
-
-	}
-
 	render() {
 		const roomName = this.props.roomName;
 		console.log("this.state.occupied");
@@ -284,7 +280,7 @@ class StatusPanel extends Component {
 					<Row>
 					<Col md={4}>
 						<div>
-							<div className="circle">
+							<div className="circle" style={{fill:this.state.fillColor}}>
 							</div>
 						</div>
 					</Col>
