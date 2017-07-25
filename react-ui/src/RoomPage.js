@@ -280,7 +280,7 @@ class StatusPanel extends Component {
 					<Row>
 					<Col md={4}>
 						<div>
-							<div className="circle" style={{fill:this.state.fillColor}}>
+							<div className="circle" style={{backgroundColor:this.state.fillColor+"!important"}}>
 							</div>
 						</div>
 					</Col>
