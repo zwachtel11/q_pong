@@ -271,17 +271,18 @@ class StatusPanel extends Component {
 		// }
 
 		
-						//<svg>
-						//	<circle cx={75} cy={75} r={75} fill={this.state.fillColor} />
-						//</svg>
+						
+						//<div className="circle" style={{backgroundColor:this.state.fillColor+"!important"}}>
+						//	</div>
 		return (
 			<Col md={8}>
 				<Panel header={<h1>{roomName}</h1>} style={{textAlign:"center"}}>
 					<Row>
 					<Col md={4}>
 						<div>
-							<div className="circle" style={{backgroundColor:this.state.fillColor+"!important"}}>
-							</div>
+							<svg>
+								<circle cx={75} cy={75} r={75} fill={this.state.fillColor} />
+							</svg>
 						</div>
 					</Col>
 					<Col md={8}>
