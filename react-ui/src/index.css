@@ -7,6 +7,22 @@ body {
   /*font-family: 'Montserrat Alternates', sans-serif;*/
 }
 
+.circle {
+  padding-top:75%;
+  width:75%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #555;
+  color: yellow;
+  min-width: 1em;
+  border-radius: 50%;
+  vertical-align: middle;
+}
+.circle.opened {
+  transform: scale(1);
+}
+
 .winner {
   /*background: #06479a;*/
   /*background:rgba(6, 71, 154,1);*/

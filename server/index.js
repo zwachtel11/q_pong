@@ -266,7 +266,12 @@ app.get('/api/rooms', (req, res) => {
 app.get('/api/rooms/:roomname', (req, res) => {
   res.set('Content-Type', 'application/json');
   Room.findOne({room_name: req.params.roomname}, (err, room) => {
-    if (err) throw err;
+    if (err) {
+      throw err;
+      res.send({
+        
+      })
+    }
     res.send({
         roomName: room.room_name,
         occupied: room.occupied,

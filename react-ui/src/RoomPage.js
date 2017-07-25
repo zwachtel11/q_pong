@@ -237,6 +237,11 @@ class StatusPanel extends Component {
 	}
 
 	componentDidMount() {
+		setInterval(this.poll(), 5000);
+	}
+
+	poll = () => {
+		console.log('poll');
 		const query = '/api/rooms/' + this.props.roomName;
 	    console.log(query);
 	    fetch(query)
@@ -270,15 +275,17 @@ class StatusPanel extends Component {
 		// }
 
 		
-
+						//<svg>
+						//	<circle cx={75} cy={75} r={75} fill={this.state.fillColor} />
+						//</svg>
 		return (
 			<Col md={8}>
 				<Panel header={<h1>{roomName}</h1>} style={{textAlign:"center"}}>
+					<Row>
 					<Col md={4}>
-						<div style={{textAlign: "center"}}>
-						<svg>
-							<circle cx={75} cy={75} r={75} fill={this.state.fillColor} />
-						</svg>
+						<div>
+							<div className="circle">
+							</div>
 						</div>
 					</Col>
 					<Col md={8}>
@@ -294,6 +301,7 @@ class StatusPanel extends Component {
 						</div>
 					}
 					</Col>
+					</Row>
 				</Panel>
 			</Col>
 		)

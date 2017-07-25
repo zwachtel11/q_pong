@@ -26,6 +26,12 @@ const About = () => (
   </div>
 )
 
+const Github = () => (
+  <div className="container">
+    <h1>Github</h1>
+  </div>
+)
+
 class Routerr extends Component {
   render() {
     return (
@@ -37,11 +43,23 @@ class Routerr extends Component {
           <Route exact path="/rooms/:roomName" component={RoomPage} />
           <Route exact path='/rooms/:roomName/matches' component={MatchesPage} />
           <Route path="/about" component={About} />
+          <Route path="/github" component={Github} />
+          <Route path="/roomsetup" component={RoomSetup} />
         </div>
       </Router>
     )
   }
 }
+
+const RoomSetup = () => (
+  <div className="container">
+    <h1>Room Setup</h1>
+    <p>Have a room you want setup? Have a spare dragonboard or raspberry pi?</p>
+    <p>Send us an email at sford@qti.qualcomm.com</p>
+  </div>
+)
+
+
 
 class Naver extends Component {
   render() {
@@ -54,12 +72,15 @@ class Naver extends Component {
         </Navbar.Header>
         <Nav >
           <NavItem><Link to="/about"><h3>About</h3></Link></NavItem>
-          <NavItem><Link to="/about"><h3>Github</h3></Link></NavItem>
+          <NavItem><Link to="/roomsetup"><h3>Request Room Setup</h3></Link></NavItem>
+          <NavItem><Link to="/github"><h3>Github</h3></Link></NavItem>
         </Nav>
       </Navbar>
     )
   }
 }
+
+
 
 export default class App extends Component {
   render() {
