@@ -124,7 +124,7 @@ class WeeklyChart extends Component {
 		const formattedData = this.state.data.map((dp, index) => {
 			return {
 				// hour: index + 1,
-				day: moment(this.state.updatedAt).subtract(6-index, 'days').format('ddd'),
+				day: moment(this.state.updatedAt).subtract(7-index, 'days').format('ddd'),
 				value: dp * 24
 			}
 		});
@@ -237,11 +237,7 @@ class StatusPanel extends Component {
 	}
 
 	componentDidMount() {
-		setInterval(this.poll(), 5000);
-	}
-
-	poll = () => {
-		console.log('poll');
+		// setInterval(this.poll(), 5000);
 		const query = '/api/rooms/' + this.props.roomName;
 	    console.log(query);
 	    fetch(query)
@@ -264,6 +260,10 @@ class StatusPanel extends Component {
 	      }).catch(e => {
 	        throw e;
 	      });
+	}
+
+	poll = () => {
+
 	}
 
 	render() {
