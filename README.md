@@ -4,6 +4,8 @@
 
 QPong is a timesaving IoT platform that allows Qualcomm employees to check the availability of recreational spaces on campus.  A Raspberry Pi in the room processes real-time motion sensor data with a Python script and sends it to a central Node.js API, which stores it in a Mongo database.  Users can access QPong on the desktop with a React-developed web app or on mobile through the QPong iOS app.
 
+![Demo](/images/qpongdemo.gif)
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running. Note: You will need to make modifications in several spots to match your setup. (A few spots are the database address, room name, and GPIO pins on the Python script)
